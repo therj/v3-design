@@ -1,0 +1,10 @@
+@use '../2-tools/normalize' as *;
+html {
+  font-size: var(--root-font-size);
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "v3-design",
+  "version": "1.0.0",
+  "description": "Portfolio design v3",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "watch": "parcel serve src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therj/v3-design.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Rabindra Joshi",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/therj/v3-design/issues"
+  },
+  "homepage": "https://github.com/therj/v3-design#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.32.8"
+  }
+}

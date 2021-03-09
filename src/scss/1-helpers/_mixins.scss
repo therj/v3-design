@@ -1,0 +1,21 @@
+@use './colors' as clr;
+
+
+
+@mixin light-mode-vars {
+  --light: #123;
+}
+
+@mixin dark-mode-vars {
+  --text-color: #{clr.$grey-50};
+  --title-color: #{clr.$grey-100};
+}
+
+
+@mixin dark-mode-image-filter {
+  // Make images slightly grayscale
+    filter: grayscale(30%) brightness(0.8) contrast(1.2);
+    &.no-dark {
+      filter: unset;
+  }
+}

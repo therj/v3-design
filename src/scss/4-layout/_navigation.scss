@@ -1,0 +1,33 @@
+.nav{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+
+  &__ham{
+    height: 40px;
+    width: 40px;
+    padding: 6px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    // overflow: hidden;
+    *{
+      background-color: #fff;
+      border-radius: 500px ;
+      height: 6px;
+
+    }
+    &--small{
+      width: 18px;
+    }
+    &--large{
+      width: 36px;
+    }
+  }
+  &__menu{
+    display: none;
+  }
+}

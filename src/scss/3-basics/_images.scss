@@ -1,0 +1,7 @@
+@use '../1-helpers/mixins' as m;
+
+
+[data-theme='dark'] img,
+img.force-dark {
+  @include m.dark-mode-image-filter;
+}

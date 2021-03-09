@@ -1,0 +1,97 @@
+@use './mixins' as m;
+@use './colors' as clr;
+
+:root {
+  // light mode variables
+  @include m.light-mode-vars();
+
+  &[data-theme='dark'] {
+    // dark mode variables
+    @include m.dark-mode-vars();
+  }
+  // Common
+  --root-font-size: 62.5%;
+  --body-font-size: 1.6rem;
+
+  // Light Mode
+  --text-color: var(--grey-100);
+  --bg-color: var(--grad-100);
+
+  // Dark Mode
+  &[data-theme='dark'] {
+    --text-color: var(--grey-900);
+    --bg-color: var(--grey-100);
+  }
+  // COLORS
+  /***************************
+  /***************************
+  Cool Grey Colors
+  ***************************/
+  --grey-50: #{clr.$grey-50};
+  --grey-100: #{clr.$grey-100};
+  --grey-200: #{clr.$grey-200};
+  --grey-300: #{clr.$grey-300};
+  --grey-400: #{clr.$grey-400};
+  --grey-500: #{clr.$grey-500};
+  --grey-600: #{clr.$grey-600};
+  --grey-700: #{clr.$grey-700};
+  --grey-800: #{clr.$grey-800};
+  --grey-900: #{clr.$grey-900};
+  --grey-1000: #{clr.$grey-1000};
+
+  /***************************
+  Primary Purple Colors
+  ***************************/
+  --purple-100: #{clr.$purple-100};
+  --purple-200: #{clr.$purple-200};
+  --purple-300: #{clr.$purple-300};
+  --purple-400: #{clr.$purple-400};
+  --purple-500: #{clr.$purple-500};
+  --purple-600: #{clr.$purple-600};
+  --purple-700: #{clr.$purple-700};
+  --purple-800: #{clr.$purple-800};
+  --purple-900: #{clr.$purple-900};
+  --purple-1000: #{clr.$purple-1000};
+
+  /***************************
+  Primary Blue Colors
+  ***************************/
+  --blue-100: #{clr.$blue-100};
+  --blue-200: #{clr.$blue-200};
+  --blue-300: #{clr.$blue-300};
+  --blue-400: #{clr.$blue-400};
+  --blue-500: #{clr.$blue-500};
+  --blue-600: #{clr.$blue-600};
+  --blue-700: #{clr.$blue-700};
+  --blue-800: #{clr.$blue-800};
+  --blue-900: #{clr.$blue-900};
+  --blue-1000: #{clr.$blue-1000};
+
+  /***************************
+  Primary Gradient Colors (10-90)
+  ***************************/
+  --grad-100: #{clr.$grad-100};
+  --grad-200: #{clr.$grad-200};
+  --grad-300: #{clr.$grad-300};
+  --grad-400: #{clr.$grad-400};
+  --grad-500: #{clr.$grad-500};
+  --grad-600: #{clr.$grad-600};
+  --grad-700: #{clr.$grad-700};
+  --grad-800: #{clr.$grad-800};
+  --grad-900: #{clr.$grad-900};
+  --grad-1000: #{clr.$grad-1000};
+
+  /***************************
+  Gradient Colors Wide (30-70)
+  ***************************/
+  --grad-100-wide: #{clr.$grad-100-wide};
+  --grad-200-wide: #{clr.$grad-200-wide};
+  --grad-300-wide: #{clr.$grad-300-wide};
+  --grad-400-wide: #{clr.$grad-400-wide};
+  --grad-500-wide: #{clr.$grad-500-wide};
+  --grad-600-wide: #{clr.$grad-600-wide};
+  --grad-700-wide: #{clr.$grad-700-wide};
+  --grad-800-wide: #{clr.$grad-800-wide};
+  --grad-900-wide: #{clr.$grad-900-wide};
+  --grad-1000-wide: #{clr.$grad-1000-wide};
+}
