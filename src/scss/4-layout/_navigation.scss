@@ -13,6 +13,8 @@ body {
     // width: 100%;
     position: fixed;
     overflow-y: scroll;
+    margin-left: 50%;
+    transform: translateX(-50%);
     // transform: translateX(50%);
     // box-sizing: content-box;
     // margin-right: 100px;
@@ -68,7 +70,7 @@ body {
     height: 30px;
     // justify-items: center;
     // align-items: center;
-    .hidden{
+    .hidden {
       display: none;
     }
     &--light,
