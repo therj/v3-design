@@ -1,4 +1,60 @@
 @use '../1-helpers/mixins' as m;
-
+@use '../1-helpers/colors' as clr;
 body {
+  outline: green dotted 3px;
+  // .hidden {
+  //   display: none;
+  //   // opacity: 0;
+  //   transition: visibility 0s linear 300ms, opacity 300ms;
+  //   animation: hideIcon;
+  // }
+
+  .hello {
+    &__hi {
+      // margin-top: 128px;
+    }
+    &__name {
+      // background: var(--title-color-grad);
+      // background: var(--title-color-grad);
+      background: var(--title-color-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 300%;
+      animation: title-animation 16s linear infinite;
+      font-weight: 700;
+      font-size: 5rem;
+    }
+  }
+  @keyframes title-animation {
+    0% {
+      background-position: 0px 0px;
+    }
+    100% {
+      background-position: 300% 0px;
+    }
+  }
+  footer {
+    margin-top: 128px;
+    position: relative;
+    background: var(--menu-bg);
+    height: 200px;
+    // clip-path: polygon(0 0, 0 50%, 100% 50%);
+    &:before {
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      top: -64px;
+      height: 128px;
+      background: var(--menu-bg);
+      clip-path: polygon(0 0, 0 50%, 100% 50%);
+    }
+  }
+}
+
+.demo-images{
+  // display: none;
+  height: 600px;
+  overflow: hidden;
 }

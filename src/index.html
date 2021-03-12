@@ -3,39 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Rabindra Joshi. I build things for the web"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rabindra Joshi</title>
-    <script src="js/script.js"></script>
     <link rel="stylesheet" href="scss/main.scss" />
+    <script src="./js/theme.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+
   </head>
-  <script src="./js/theme.js"></script>
   <body>
+    <!-- Navbar start -->
     <nav class="nav">
-      <div class="nav__logo">R</div>
-      <div class="nav__theme">
-        <span
-          ><img
-            src="./images/assets/sun.svg"
-            alt="sun: light mode"
-            aria-label="switch to light mode"
-        /></span>
-        <span
-          ><img
-            src="./images/assets/moon.svg"
-            alt="moon: dark mode"
-            aria-label="switch to dark mode"
-        /></span>
+      <div class="nav__logo">
+        <img src="./images/brand/logo/svg/large-6.svg" alt="" />
       </div>
-      <div class="nav__ham">
+      <div class="nav__theme">
+        <a
+          href="javascript:void(0)"
+          class="goLight nav__theme--light"
+          aria-label="switch to light mode"
+          ><img src="./images/assets/sun.svg" alt="switch to light theme"
+        /></a>
+        <a
+          href="javascript:void(0)"
+          class="goDark nav__theme--dark"
+          aria-label="switch to dark mode"
+        >
+          <img src="./images/assets/moon.svg" alt="switch to dark theme"
+        /></a>
+      </div>
+      <!-- <div class="nav__ham">
+      </div> -->
+
+      <label for="nav__toggle" class="nav__ham">
         <span class="nav__ham--small"></span>
         <span class="nav__ham--large"></span>
         <span class="nav__ham--small"></span>
+      </input>
+    </label>
+    <input type="checkbox" id="nav__toggle" class="nav__toggle">
+      <div class="nav__menu nav__menu">
+        <ul class="nav__menu__items">
+          <li class="nav__menu__items--item"><a href="">About</a></li>
+          <li class="nav__menu__items--item"><a href="">Recent</a></li>
+          <li class="nav__menu__items--item"><a href="">Experience</a></li>
+          <li class="nav__menu__items--item"><a href="">Tools</a></li>
+          <li class="nav__menu__items--item"><a href="">Open Source</a></li>
+          <li class="nav__menu__items--item"><a href="">Blog</a></li>
+          <li class="nav__menu__items--item"><a href="">Podcast</a></li>
+          <li class="nav__menu__items--item"><a href="">Contact</a></li>
+          <li class="nav__menu__items--item"><a href="">Resume</a></li>
+        </ul>
       </div>
-      <div class="nav__menu"></div>
     </nav>
-    <h1 class="name">Rabindra Joshi</h1>
-    <p>Hello World</p>
-    <img class="no-dark" src="https://picsum.photos/400/200" alt="" />
-    <img class="force-dark" src="https://picsum.photos/400/200" alt="" />
+    <!-- Creates CLS, use after selector! -->
+    <nav-poly></nav-poly>
+    <!-- Navbar End -->
+
+    <section class="intro">
+      <div class="hello">
+        <p class="hello__hi">Hi, my name is</p>
+        <h1 class="hello__name after-dot">Rabindra Joshi</h1>
+        <p class="hello__intro--short">I build things for the web.</p>
+        <p class="hello__intro--long">
+          I’m a Software Engineer based in Kathmandu, Nepal. I’ve an obsession
+          with building exceptional, high quality, well-architectured, web-based
+          solutions. My goal is to collaborate with other world-class engineers
+          to build products that deliver performant experience.
+        </p>
+      </div>
+      <div class="cta">
+        <a href="" class="cta__btn cta__btn--work">Work With Me</a>
+        <a href="" class="cta__btn cta__btn--mentorship">
+          <span>
+            Mentorship (beta)
+          </span>
+        </a>
+      </div>
+    </section>
+    <section class="recent">
+      <h2>Recent Updates</h2>
+    </section>
+    <section class="demo-images">
+
+
+    <div
+      style="
+        background-image: url(https://picsum.photos/500/400);
+        width: 92%;
+        height: 400px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 20px auto;
+      "
+    ></div>
+
+    <div
+      style="
+        background-image: url(https://picsum.photos/500/400);
+        width: 92%;
+        height: 400px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 20px auto;
+      "
+    ></div>
+
+    <div
+      style="
+        background-image: url(https://picsum.photos/500/400);
+        width: 92%;
+        height: 400px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 20px auto;
+      "
+    ></div>
+    </section>
+
+    <!-- <img class="no-dark" src="https://picsum.photos/400/200" alt="" />
+    <img class="force-darkX" src="https://picsum.photos/400/200" alt="" />
+    <img class="force-darkX" src="https://picsum.photos/400/200" alt="" />
+    <img class="force-darkX" src="https://picsum.photos/400/200" alt="" />
+    <img class="force-darkX" src="https://picsum.photos/400/200" alt="" /> -->
+
+    <footer></footer>
+
+    <script async defer src="./js/script.js"></script>
   </body>
 </html>

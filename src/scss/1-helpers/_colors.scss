@@ -9,6 +9,7 @@ Darkest: 1000
 /***************************
 Cool Grey Colors
 ***************************/
+$grey-25: hsl(210, 6%, 4%); // #0A0A0B
 $grey-50: hsl(210, 12%, 8%); // #121417
 $grey-100: hsl(210, 24%, 16%); // #1F2933
 $grey-200: hsl(210, 20%, 25%); // #33404D
@@ -66,6 +67,19 @@ $grad-800: linear-gradient(90deg, $purple-800 10%, $blue-800 90%);
 $grad-900: linear-gradient(90deg, $purple-900 10%, $blue-900 90%);
 $grad-1000: linear-gradient(90deg, $purple-1000 10%, $blue-1000 90%);
 
+// special for animated gradients!
+// light
+$grad-100-3: linear-gradient(90deg, $purple-100, $blue-100, $purple-100);
+$grad-200-3: linear-gradient(90deg, $purple-200, $blue-200, $purple-200);
+$grad-300-3: linear-gradient(90deg, $purple-300, $blue-300, $purple-300);
+$grad-400-3: linear-gradient(90deg, $purple-400, $blue-400, $purple-400);
+$grad-500-3: linear-gradient(90deg, $purple-500, $blue-500, $purple-500);
+// dark
+$grad-600-3: linear-gradient(90deg, $purple-600, $blue-600, $purple-600);
+$grad-700-3: linear-gradient(90deg, $purple-700, $blue-700, $purple-700);
+$grad-800-3: linear-gradient(90deg, $purple-800, $blue-800, $purple-800);
+$grad-900-3: linear-gradient(90deg, $purple-900, $blue-900, $purple-900);
+$grad-1000-3: linear-gradient(90deg, $purple-1000, $blue-1000, $purple-1000);
 
 /***************************
 Gradient Colors Wide (30-70)

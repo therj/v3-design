@@ -1,33 +1,240 @@
-.nav{
+@use '../1-helpers/colors' as clr;
+
+body {
+  @mixin hideScrollbar {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  &.scroll-lock {
+    // width: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    // transform: translateX(50%);
+    // box-sizing: content-box;
+    // margin-right: 100px;
+    // @include hideScrollbar();
+    // height: 100vh;
+    // overflow-y: hidden;
+  }
+}
+.nav {
+  z-index: 50;
+  background: var(--menu-bg);
+  outline: #fff;
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 12px 20px;
+  transition: transform 200ms ease-out;
+  position: sticky;
+  top: 0;
 
-  &__ham{
+  // &:has(&__ham + &__toggle:checked) &__menu {
+  //   background-color: red !important;
+  // }
+
+  &--hide {
+    transform: translate3d(0, -100%, 0);
+    transition: transform 200ms ease-in;
+    // hide the polygon sibling regardless of --hide!
+    @mixin siblingPolygon {
+      transform: translate3d(0, -200%, 0);
+    }
+    & + nav-poly {
+      @include siblingPolygon();
+      &.poly--hide {
+        @include siblingPolygon();
+      }
+    }
+  }
+  &__logo {
+    z-index: 200;
+    img {
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+  }
+
+  &__theme {
+    position: relative;
+    // display: flex;
+    display: inline;
+    width: 30px;
+    height: 30px;
+    // justify-items: center;
+    // align-items: center;
+    .hidden{
+      display: none;
+    }
+    &--light,
+    &--dark {
+      --dim: 30px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    img {
+      display: block;
+      height: var(--dim);
+      width: var(--dim);
+    }
+  }
+  &__toggle {
+    display: none;
+    & ~ .nav__menu {
+      transform: translate3d(0, calc(100vh + 128px), 0);
+    }
+    &:checked {
+      & ~ .nav__menu {
+        transform: translate3d(0, 132px, 0);
+      }
+    }
+  }
+  &__ham {
+    z-index: 200;
+    cursor: pointer;
     height: 40px;
     width: 40px;
-    padding: 6px 2px;
+    // padding: 10px 2px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    // overflow: hidden;
-    *{
-      background-color: #fff;
-      border-radius: 500px ;
-      height: 6px;
 
+    * {
+      background: var(--ham-bg);
+      border-radius: 500px;
+      height: 6px;
     }
-    &--small{
+    &--small {
       width: 18px;
     }
-    &--large{
+    &--large {
       width: 36px;
     }
   }
-  &__menu{
-    display: none;
+  &__menu {
+    &:before {
+      content: '';
+      // background: red;
+      // z-index: 400;
+      position: absolute;
+      top: -64px;
+      height: 128px;
+      right: 0;
+      left: 0;
+      background: inherit;
+      clip-path: polygon(0 0, 0 50%, 100% 50%);
+    }
+    // background: var(--bg-color);
+    z-index: 100;
+    // min-height: 400px;
+    // background: clr.$grad-200;
+    background: var(--menu-bg);
+    font-weight: bold;
+    font-size: 3rem;
+    // display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 0; // nav height
+    left: 0;
+    height: calc(100vh - 128px);
+    // padding: 2rem;
+    transition: transform 200ms ease-in-out;
+    display: flex;
+    // display: none;
+    &__items {
+      flex: 1;
+      // @media screen and (min-height:450px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      // height: 100%;
+
+      // }
+      // min-height: 524px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+      &--item {
+        a {
+          line-height: 2em;
+          display: block;
+          text-align: center;
+          // color: clr.$grey-25;
+          // -webkit-background-cl
+          // -webkit-background-clip: text;
+          // background-clip: text;
+          background: var(--ham-bg);
+          -webkit-background-clip: text;
+          background-clip: text;
+          background-size: 100%;
+          color: transparent;
+          // background: var(--ham-bg);
+          text-decoration: none;
+          &:focus {
+            outline: 2px solid var(--bg-color);
+            outline-offset: -2px;
+          }
+        }
+      }
+    }
   }
+}
+nav-poly {
+  // no index will display over open menu
+  z-index: 49; //less than nav
+  content: '';
+  position: sticky;
+  height: 64px;
+  display: block;
+  top: 64px;
+  background: var(--menu-bg);
+  // rectangle from top!
+  // clip-path: polygon(0 50%, 100% 100%, 100% 50%);
+  // height: 128px;
+  // transform: translate3d(0, -50%, 0);
+  // translateZ -100% on hide!
+
+  // triangle from bottom!
+  // -webkit-clip-path: polygon(100% 0%, 0 0%, 100% 100%);
+  clip-path: polygon(0 0, 100% 100%, 100% 0);
+  // transform-origin: top left;
+  transform: translate3d(0, 0%, 0);
+  // translateZ to -200% or higher (if nav menu is larger than nav poly), keep it close because animation will start at given distance!
+  transition: transform 200ms ease-out;
+  // -webkit-transition: transform 200ms ease-in-out;
+  // backface-visibility: hidden;
+  // outline: 1px solid transparent;
+  // outline-offset: -5px;
+  // border-radius: 0;
+  &.poly--hide {
+    // clip-path: polygon(100% 100%, 0 0%, 100% 100%);
+    // transform: scale(1, 0);
+    // transform: scale(1, 0);
+    // transform-origin: top left;
+    transform: translate3d(0, -100%, 0);
+    transition: transform 200ms ease-in;
+    // outline: 10px solid transparent;
+    // -webkit-transition: transform 200ms ease-in-out;
+    // height: 0;
+    // background: transparent;
+    // transition: background ease-in-out;
+
+    // transition: opacity cubic-bezier(0, 1, 0.5, 1);
+    // transition: opacity cubic-bezier(0, 1, 0.5, 1);
+    // transition: opacity ease-in-out;
+  }
+}
+
+.intro {
+  // position: relative;
+  // padding-top: 64px;
 }

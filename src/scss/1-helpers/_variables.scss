@@ -2,25 +2,27 @@
 @use './colors' as clr;
 
 :root {
-  @include m.site-colors-css-variables;
+  // you probably don't need all colors as css variables
+  // @include m.site-colors-css-variables;
+
   // light mode variables
-  @include m.light-mode-vars();
+  @include m.light-mode-css-variables();
 
   &[data-theme='dark'] {
     // dark mode variables
-    @include m.dark-mode-vars();
+    @include m.dark-mode-css-variables();
   }
+
   // Common
   --root-font-size: 62.5%;
   --body-font-size: 1.6rem;
+  --body-font-size: 2rem;
 
-  // Light Mode
-  --text-color: #{clr.$grey-100};
-  --bg-color: #{clr.$grad-100};
+  --title-font-family: 'Inter', sans-serif;
+  --body-font-family: 'Roboto', sans-serif;
+  --body-font-weight: 400;
+  --body-line-height: 1.2;
+  --side-space: 20px;
+  --gap-between: 10px;
 
-  // Dark Mode
-  &[data-theme='dark'] {
-    --text-color: #{clr.$grey-900};
-    --bg-color: #{clr.$grey-100};
-  }
 }

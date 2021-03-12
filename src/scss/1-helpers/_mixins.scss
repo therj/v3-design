@@ -1,22 +1,65 @@
 @use './colors' as clr;
 
-
-
-@mixin light-mode-vars {
-  --light: #123;
+@mixin light-mode-css-variables {
+  --text-color: #{clr.$grey-25};
+  --bg-color: #{clr.$grey-1000};
+  --bg-color2: #{clr.$grey-1000};
+  --bg-color3: #fff;
+  --menu-bg: #{clr.$grad-500};
+  --title-color-grad: #{clr.$grad-500-3};
+  // --title-color: #{clr.$grey-100};
+  --ham-bg: #{clr.$grad-100};
+  --work-btn-bg: #{clr.$grad-500-3};
+  --work-btn-text-color: #{clr.$grey-1000};
+  // --mentorship-btn-bg: #{clr.$grad-500};
+  --mentorship-btn-border: #{clr.$grad-500-3};
+  // --mentorship-btn-bg: transparent;
 }
 
-@mixin dark-mode-vars {
-  --text-color: #{clr.$grey-50};
-  --title-color: #{clr.$grey-100};
+@mixin dark-mode-css-variables {
+  --text-color: #{clr.$grey-900};
+  --bg-color: #{clr.$grey-50};
+  --menu-bg: #{clr.$grad-700};
+  --title-color-grad: #{clr.$grad-400-3};
+  // --title-color: #{clr.$grey-800};
+  --ham-bg: #{clr.$grad-200};
+  --work-btn-bg: #{clr.$grad-700-3};
+  // --mentorship-btn-bg: #{clr.$grad-500};
+  // --mentorship-btn-bg: transparent;
+  --mentorship-btn-border: #{clr.$grad-400-3};
 }
 
+@mixin text-xs {
+  font-size: 0.8rem;
+  line-height: 1.2em;
+}
+@mixin text-s {
+  font-size: 1.2rem;
+  line-height: 1.2em;
+}
+
+@mixin text-m {
+  font-size: 1.6rem;
+  line-height: 1.5em;
+}
+@mixin text-l {
+  font-size: 2.4rem;
+  line-height: 1.2em;
+}
+@mixin text-xl {
+  font-size: 3.2rem;
+  line-height: 1.2em;
+}
+@mixin text-xxl {
+  font-size: 4rem;
+  line-height: 1.2em;
+}
 
 @mixin dark-mode-image-filter {
   // Make images slightly grayscale
-    filter: grayscale(30%) brightness(0.8) contrast(1.2);
-    &.no-dark {
-      filter: unset;
+  filter: grayscale(30%) brightness(0.8) contrast(1.2);
+  &.no-dark {
+    filter: unset;
   }
 }
 
@@ -93,6 +136,4 @@
   --grad-800-wide: #{clr.$grad-800-wide};
   --grad-900-wide: #{clr.$grad-900-wide};
   --grad-1000-wide: #{clr.$grad-1000-wide};
-
-
 }
