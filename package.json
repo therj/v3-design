@@ -10,7 +10,7 @@
     "gh-clean": "rm -r .cache && rm -r dist",
     "gh-build": "parcel build ./src/index.html --no-minify --public-url ./",
     "gh-push": "git add dist && git commit -m 'gh pages' && git subtree push --prefix dist origin gh-pages",
-    "gh":"gh-clean && gh-build && gh-push",
+    "gh":"npm run gh-clean && npm run gh-build && npm run gh-push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
