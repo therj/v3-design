@@ -7,6 +7,8 @@
     "dev": "parcel src/index.html",
     "watch": "parcel serve src/index.html",
     "build": "parcel build src/index.html",
+    "gh-build": "parcel build ./src/index.html --no-minify --public-url ./",
+    "gh-push": "git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
