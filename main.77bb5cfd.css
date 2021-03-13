@@ -444,6 +444,13 @@ body footer:before {
   --mentorship-btn-border: linear-gradient(90deg, #c56ef7, #806ef7, #c56ef7);
 }
 
+:root[data-theme=dark] body {
+  transition: text 300ms ease-out, background 300ms ease-out;
+}
+:root body {
+  transition: text 300ms ease-in, background 300ms ease-in;
+}
+
 body {
   color: var(--text-color);
   background: var(--bg-color);
@@ -548,18 +555,28 @@ img.force-dark.no-dark {
   filter: unset;
 }
 
+:root .nav__theme--light {
+  display: none;
+}
+:root[data-theme=dark] .nav__theme--dark {
+  display: none;
+}
+:root[data-theme=dark] .nav__theme--light {
+  display: unset;
+}
+
 body {
   z-index: -1;
 }
 body.scroll-lock {
   width: 100%;
   overflow-y: scroll;
-  height: 100vh;
 }
 
 .nav {
   z-index: 900;
   height: 64px;
+  margin-bottom: 64px;
   overflow-y: visible;
   background: var(--menu-bg);
   outline: #fff;
@@ -590,22 +607,10 @@ body.scroll-lock {
   height: 40px;
   display: block;
 }
-.nav__theme {
-  position: relative;
-  display: inline;
-  width: 30px;
-  height: 30px;
-}
-.nav__theme .hidden {
-  display: none;
-}
 .nav__theme--light, .nav__theme--dark {
   --dim: 30px;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
-.nav__theme img {
+.nav__theme--light img, .nav__theme--dark img {
   display: block;
   height: var(--dim);
   width: var(--dim);
@@ -614,10 +619,10 @@ body.scroll-lock {
   display: none;
 }
 .nav__toggle ~ .nav__menu {
-  transform: translate3d(0, calc(100vh + 128px), 0);
+  transform: translate3d(0, calc(100vh + 64px), 0);
 }
 .nav__toggle:checked ~ .nav__menu {
-  transform: translate3d(0, 134px, 0);
+  transform: translate3d(0, 128px, 0);
 }
 .nav__ham {
   cursor: pointer;
@@ -639,7 +644,7 @@ body.scroll-lock {
 .nav__ham--large {
   width: 90%;
 }
-.nav__ham--container:after {
+.nav__poly:after {
   content: "";
   position: absolute;
   height: 64px;
@@ -652,12 +657,11 @@ body.scroll-lock {
   transform: translate3d(0, 0%, 0);
   transition: transform 200ms ease-out;
 }
-.nav__ham--container:after.poly--hide {
+.nav__poly--hide:after {
   transform: translate3d(0, -100%, 0);
   transition: transform 200ms ease-in;
 }
 .nav__menu {
-  padding-top: 16px;
   background: var(--menu-bg);
   font-weight: bold;
   font-size: 3rem;
@@ -667,59 +671,75 @@ body.scroll-lock {
   top: 0;
   left: 0;
   height: 100vh;
-  height: calc(100vh + 128px);
+  height: calc(100vh - 128px);
   transition: transform 200ms ease-in-out;
   display: flex;
 }
 .nav__menu::before {
   content: "";
   position: absolute;
-  top: -72px;
-  height: 76px;
+  top: -66px;
+  top: -64px;
+  height: 66px;
+  height: 64px;
   right: 0;
   left: 0;
-  background: var(--bg-color);
-  clip-path: polygon(0 0, 0 12px, 100% 100%, 100% calc(100% - 12px));
+  background: inherit;
+  clip-path: polygon(0 0px, 0 100%, 100% 100%);
 }
 .nav__menu::after {
   content: "";
   position: absolute;
   top: -64px;
-  height: 80px;
+  height: 72px;
   right: 0;
   left: 0;
-  background: inherit;
-  clip-path: polygon(0 0px, 0 100%, 100% 100%, 100% calc(100% - 16px));
+  background: var(--bg-color);
+  clip-path: polygon(0 0, 0 8px, 100% 72px, 100% calc(72px - 8px));
 }
 .nav__menu__items {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  min-height: 590px;
+  max-height: 990px;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.nav__menu__items--container {
+  display: flex;
+  justify-content: center;
+  flex-basis: 100%;
   overflow-y: auto;
 }
 .nav__menu__items--item a {
+  display: flex;
   line-height: 2em;
-  display: block;
-  text-align: center;
   background: var(--ham-bg);
   -webkit-background-clip: text;
-  background-clip: text;
   background-size: 100%;
   color: transparent;
   text-decoration: none;
 }
-.nav__menu__items--item a:focus {
-  outline: 2px solid var(--bg-color);
-  outline-offset: -2px;
+.nav__menu__items--item a:focus, .nav__menu__items--item a:hover {
+  position: relative;
+  background: #eae7fe;
+  -webkit-background-clip: text;
+}
+.nav__menu__items--item a:focus::before, .nav__menu__items--item a:hover::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  top: 5px;
+  bottom: 5px;
+  border: 2px solid #eae7fe;
+  border-radius: 4px;
 }
 
 body {
-  max-width: 669px;
   margin: auto;
 }
 
-/*# sourceMappingURL=main.1dd808f3.css.map */
+/*# sourceMappingURL=/main.77bb5cfd.css.map */
