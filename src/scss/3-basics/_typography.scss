@@ -1,6 +1,26 @@
 @use '../1-helpers' as help;
 @use '../1-helpers/mixins' as m;
 
+//
+
+:root {
+  @mixin tran($light: 1) {
+    $tra: ease-out;
+    @debug $light;
+    @if $light == 1 {
+      $tra: ease-in;
+    }
+    transition: text 300ms $tra, background 300ms $tra;
+  }
+  &[data-theme='dark'] body {
+    @include tran(2);
+      // transition: text 200ms ease-in-out, background 200ms ease-in;
+
+  }
+  body {
+    @include tran(1);
+  }
+}
 body {
   color: var(--text-color);
   background: var(--bg-color);

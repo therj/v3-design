@@ -1,0 +1,5 @@
+@function stripAndPx($in1, $in2){
+  $stripped1: $in1 / ($in1 * 0 + 1) + $in2 / ($in2 * 0 + 1); //strip unit
+  $stripped2: $in2 / ($in2 * 0 + 1); //strip unit
+  @return (($stripped1)) * 1px; //convert to px
+}

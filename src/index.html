@@ -14,9 +14,10 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Navbar start -->
@@ -24,47 +25,49 @@
       <div class="nav__logo">
         <img src="./images/brand/logo/svg/large-6.svg" alt="" />
       </div>
-      <div class="nav__theme">
-        <a
-          href="javascript:void(0)"
-          class="goLight nav__theme--light"
-          aria-label="switch to light mode"
-          ><img src="./images/assets/sun.svg" alt="switch to light theme"
-        /></a>
-        <a
-          href="javascript:void(0)"
-          class="goDark nav__theme--dark"
-          aria-label="switch to dark mode"
-        >
-          <img src="./images/assets/moon.svg" alt="switch to dark theme"
-        /></a>
-      </div>
-      <!-- <div class="nav__ham">
-      </div> -->
+      <a
+        href="javascript:void(0)"
+        class="goLight nav__theme--light"
+        aria-label="switch to light mode"
+        ><img src="./images/assets/sun.svg" alt="switch to light theme"
+      /></a>
+      <a
+        href="javascript:void(0)"
+        class="goDark nav__theme--dark"
+        aria-label="switch to dark mode"
+      >
+        <img src="./images/assets/moon.svg" alt="switch to dark theme"
+      /></a>
 
-      <label for="nav__toggle" class="nav__ham">
+      <!--  -->
+      <!--  -->
+      <!-- <div class="nav__theme">      </div> -->
+      <input type="checkbox" id="nav__toggle" class="nav__toggle" />
+      <label for="nav__toggle" class="nav__ham nav__poly">
         <span class="nav__ham--small"></span>
         <span class="nav__ham--large"></span>
         <span class="nav__ham--small"></span>
-      </input>
-    </label>
-    <input type="checkbox" id="nav__toggle" class="nav__toggle">
-      <div class="nav__menu nav__menu">
-        <ul class="nav__menu__items">
-          <li class="nav__menu__items--item"><a href="">About</a></li>
-          <li class="nav__menu__items--item"><a href="">Recent</a></li>
-          <li class="nav__menu__items--item"><a href="">Experience</a></li>
-          <li class="nav__menu__items--item"><a href="">Tools</a></li>
-          <li class="nav__menu__items--item"><a href="">Open Source</a></li>
-          <li class="nav__menu__items--item"><a href="">Blog</a></li>
-          <li class="nav__menu__items--item"><a href="">Podcast</a></li>
-          <li class="nav__menu__items--item"><a href="">Contact</a></li>
-          <li class="nav__menu__items--item"><a href="">Resume</a></li>
-        </ul>
+      </label>
+      <!-- <div class="nav__ham--container">
+      </div> -->
+      <!-- <nav-poly></nav-poly> -->
+      <div class="nav__menu">
+        <div class="nav__menu__items--container">
+          <ul class="nav__menu__items">
+            <li class="nav__menu__items--item"><a href="">About</a></li>
+            <li class="nav__menu__items--item"><a href="">Recent</a></li>
+            <li class="nav__menu__items--item"><a href="">Experience</a></li>
+            <li class="nav__menu__items--item"><a href="">Tools</a></li>
+            <li class="nav__menu__items--item"><a href="">Open Source</a></li>
+            <li class="nav__menu__items--item"><a href="">Blog</a></li>
+            <li class="nav__menu__items--item"><a href="">Podcast</a></li>
+            <li class="nav__menu__items--item"><a href="">Contact</a></li>
+            <li class="nav__menu__items--item"><a href="">Resume</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
     <!-- Creates CLS, use after selector! -->
-    <nav-poly></nav-poly>
     <!-- Navbar End -->
 
     <section class="intro">
@@ -82,9 +85,7 @@
       <div class="cta">
         <a href="" class="cta__btn cta__btn--work">Work With Me</a>
         <a href="" class="cta__btn cta__btn--mentorship">
-          <span>
-            Mentorship (beta)
-          </span>
+          <span> Mentorship (beta) </span>
         </a>
       </div>
     </section>
@@ -92,43 +93,41 @@
       <h2>Recent Updates</h2>
     </section>
     <section class="demo-images">
+      <div
+        style="
+          background-image: url(https://picsum.photos/500/400);
+          width: 92%;
+          height: 400px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: 20px auto;
+        "
+      ></div>
 
+      <div
+        style="
+          background-image: url(https://picsum.photos/500/400);
+          width: 92%;
+          height: 400px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: 20px auto;
+        "
+      ></div>
 
-    <div
-      style="
-        background-image: url(https://picsum.photos/500/400);
-        width: 92%;
-        height: 400px;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin: 20px auto;
-      "
-    ></div>
-
-    <div
-      style="
-        background-image: url(https://picsum.photos/500/400);
-        width: 92%;
-        height: 400px;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin: 20px auto;
-      "
-    ></div>
-
-    <div
-      style="
-        background-image: url(https://picsum.photos/500/400);
-        width: 92%;
-        height: 400px;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin: 20px auto;
-      "
-    ></div>
+      <div
+        style="
+          background-image: url(https://picsum.photos/500/400);
+          width: 92%;
+          height: 400px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: 20px auto;
+        "
+      ></div>
     </section>
 
     <!-- <img class="no-dark" src="https://picsum.photos/400/200" alt="" />
