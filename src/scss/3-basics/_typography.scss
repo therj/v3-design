@@ -31,10 +31,11 @@ body {
 
   .after-dot:after {
     content: '.';
-    display: inline-block;
+    display: inline;
     color: var(--text-color);
     font-size: 1.2em;
     line-height: 0;
+
   }
 
   section {
