@@ -1,5 +1,5 @@
-const goLight = document.querySelector(".goLight")
-const goDark = document.querySelector(".goDark")
+const goDark = document.querySelector('.goDark')
+const goLight = document.querySelector('.goLight')
 const navBar = document.querySelector('nav')
 const navPoly = document.querySelector('nav-poly')
 const navHam = document.querySelector('.nav__ham')
@@ -19,14 +19,14 @@ let HIDE_NAV_SCROLL_POS = 256;
 
 
 function setThemeIcons(mode) {
-  if (mode == LIGHT_THEME_NAME) {
-    goLight.classList.add('hidden')
-    goDark.classList.remove('hidden')
-  }
-  else if (mode == DARK_THEME_NAME) {
-    goDark.classList.add('hidden')
-    goLight.classList.remove('hidden')
-  }
+  // if (mode == LIGHT_THEME_NAME) {
+  //   goLight.classList.add('hidden')
+  //   goDark.classList.remove('hidden')
+  // }
+  // else if (mode == DARK_THEME_NAME) {
+  //   goDark.classList.add('hidden')
+  //   goLight.classList.remove('hidden')
+  // }
 
 }
 
