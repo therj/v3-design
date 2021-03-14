@@ -1,7 +1,9 @@
 @use '../1-helpers/mixins' as m;
 @use '../1-helpers/colors' as clr;
 body {
-  outline: green dotted 3px;
+  outline: #{clr.$grey-500}55 solid 40px;
+  // outline: red solid 20px;
+  outline-offset: -20px;
   // .hidden {
   //   display: none;
   //   // opacity: 0;

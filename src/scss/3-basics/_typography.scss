@@ -42,6 +42,10 @@ body {
       padding: 0px var(--side-space);
       margin: var(--gap-between) auto;
     }
+    :where(p){
+      margin-left: 0;
+      max-width: 60ch;
+    }
     .hello {
       // margin-bottom: 200px;
       &__hi {
