@@ -9,7 +9,7 @@
   --menu-bg: #{clr.$grad-500};
   --title-color-grad: #{clr.$grad-500-3};
   // --title-color: #{clr.$grey-100};
-  --ham-bg: #{clr.$grad-100};
+  --ham-bg: #{clr.$grad-200};
   --work-btn-bg: #{clr.$grad-500-3};
   --work-btn-text-color: #{clr.$grey-1000};
   // --mentorship-btn-bg: #{clr.$grad-500};
@@ -21,15 +21,15 @@
 @mixin dark-mode-css-variables {
   --text-color: #{clr.$grey-800};
   --bg-color: #{clr.$grey-75};
-  --menu-bg: #{clr.$grad-700};
+  --menu-bg: #{clr.$grad-600};
   --title-color-grad: #{clr.$grad-400-3};
   // --title-color: #{clr.$grey-800};
-  --ham-bg: #{clr.$grad-200};
+  --ham-bg: #{clr.$grad-300};
   --work-btn-bg: #{clr.$grad-700-3};
   // --mentorship-btn-bg: #{clr.$grad-500};
   --mentorship-btn-border: #{clr.$grad-400-3};
   // --mentorship-btn-bg: transparent;
-  --nav-drop-shadow: drop-shadow(0px 0px 2px #{rgba(clr.$purple-500, 0.8)});
+  --nav-drop-shadow: drop-shadow(0px 0px 2px #{rgba(clr.$purple-600, 0.8)});
 }
 
 @mixin text-xs {
