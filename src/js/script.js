@@ -1,7 +1,7 @@
 const goDark = document.querySelector('.goDark')
 const goLight = document.querySelector('.goLight')
 const navBar = document.querySelector('nav')
-const navPoly = document.querySelector('nav-poly')
+const navPoly = document.querySelector('.nav__poly')
 const navHam = document.querySelector('.nav__ham')
 const navToggleCheckbox = document.querySelector('input.nav__toggle')
 const navMenu = document.querySelector('.nav__menu')
@@ -51,13 +51,13 @@ function checkScroll() {
   console.log("🚀 ~ file: script.js ~ line 44 ~ checkScroll ~ curScroll", curScroll)
   // hide ploygon only
   // if (curScroll < NAV_HEIGHT_TOTAL_PIXEL / 4 && navPoly) {
-  //   navPoly.classList.remove('poly--hide')
+  //   navPoly.classList.remove('nav__poly--hide')
   // }
   if (curScroll >= NAV_POLY_SCROLL_HIDE) {
-    navPoly.classList.add('poly--hide')
+    navPoly.classList.add('nav__poly--hide')
   }
   else if (curScroll <= NAV_POLY_SCROLL_SHOW) {
-    navPoly.classList.remove('poly--hide')
+    navPoly.classList.remove('nav__poly--hide')
   }
 
   if (direction !== prevDirection) {
@@ -70,7 +70,7 @@ function toggleHeader(direction, curScroll) {
     //replace HIDE_NAV_SCROLL_POS with height of your header in px
     navBar.classList.add('nav--hide');
     // hide ploygon explicitly -> shouldn't come back on reverse scroll
-    navPoly ? navPoly.classList.add('poly--hide') : ''
+    navPoly ? navPoly.classList.add('nav__poly--hide') : ''
     prevDirection = direction;
   }
   else if (direction === "UP") {
