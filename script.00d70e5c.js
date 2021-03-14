@@ -118,6 +118,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"L4bL":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var goDark = document.querySelector('.goDark');
 var goLight = document.querySelector('.goLight');
 var navBar = document.querySelector('nav');
@@ -167,11 +179,6 @@ function checkScroll() {
     direction = "UP";
   }
 
-  console.log("🚀 ~ file: script.js ~ line 44 ~ checkScroll ~ curScroll", curScroll); // hide ploygon only
-  // if (curScroll < NAV_HEIGHT_TOTAL_PIXEL / 4 && navPoly) {
-  //   navPoly.classList.remove('nav__poly--hide')
-  // }
-
   if (curScroll >= NAV_POLY_SCROLL_HIDE) {
     navPoly.classList.add('nav__poly--hide');
   } else if (curScroll <= NAV_POLY_SCROLL_SHOW) {
@@ -213,8 +220,10 @@ function init() {
   goLight.addEventListener('click', function (e) {
     changeTheme(LIGHT_THEME_NAME);
     setThemeIcons(LIGHT_THEME_NAME);
-  });
-  navHam.addEventListener('click', hamClick); // fixed menu on reverse scroll
+  }); // for scroll lock
+
+  setObserver();
+  navToggleCheckbox.addEventListener('change', menuToggle); // fixed menu on reverse scroll
 
   window.addEventListener('scroll', checkScroll); // mid-scrolled reload
 
@@ -226,13 +235,107 @@ function changeTheme(mode) {
   storeThemePreference(mode);
 }
 
-function hamClick() {
-  // navMenu.classList.toggle('nav__menu--hide')
-  // navToggleCheckbox.toggleAttribute('checked');
-  // navToggleCheckbox.checked = !navToggleCheckbox.checked
-  document.body.classList.toggle('scroll-lock');
+function menuToggle() {
+  // do NOT toggle: menu can exist before JS loads
+  // That'd reverse required scroll-lock behaviour in some cases!
+  if (navToggleCheckbox.checked) {
+    document.body.classList.add('scroll-lock');
+  } else {
+    document.body.classList.remove('scroll-lock');
+  }
+}
+
+function setObserver() {
+  var targetNode = document.querySelector('body');
+  var options = {
+    attributes: true,
+    childList: false,
+    subtree: false
+  };
+  var observer = new MutationObserver(observeMe);
+  observer.observe(targetNode, options);
+
+  function observeMe(mutation, observer) {
+    var theBody = mutation[0];
+
+    if (theBody.attributeName == "class") {
+      // const blocker = (e) => { e.preventDefault(); e.stopPropagation(); }
+      scrollLock();
+
+      if (_toConsumableArray(document.body.classList).includes('scroll-lock')) {
+        console.log('Obeserverbee');
+        scrollLock.disableScroll(); // console.log("🚀 ~ file: script.js ~ line 139 ~ observeMe ~ blocker", blocker)
+      } else {
+        console.log('OUT!');
+        scrollLock.enableScroll();
+      }
+    }
+  } // call this to Disable
+
+
+  function scrollLock() {
+    // left: 37, up: 38, right: 39, down: 40,
+    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+    var keys = {
+      37: 1,
+      38: 1,
+      39: 1,
+      40: 1
+    };
+
+    function preventDefault(e) {
+      e.preventDefault();
+    }
+
+    function preventDefaultForScrollKeys(e) {
+      if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+      }
+    } // modern Chrome requires { passive: false } when adding event
+
+
+    var supportsPassive = false;
+
+    try {
+      window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function get() {
+          supportsPassive = true;
+        }
+      }));
+    } catch (e) {}
+
+    var wheelOpt = supportsPassive ? {
+      passive: false
+    } : false;
+    var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+    function disableScroll() {
+      console.log("🚀 disableScroll"); // BUG: keydown for fn+home/end/pgUp/pgDown & space!
+
+      window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+
+      window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+
+      window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+
+      window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+    function enableScroll() {
+      console.log('🚀 Enable Scroll'); // BUG: wheelEvent/keyup 'wheel' NOT removed!
+
+      window.removeEventListener('DOMMouseScroll', preventDefault, false);
+      window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+      window.removeEventListener('touchmove', preventDefault, wheelOpt);
+      window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+    scrollLock.disableScroll = disableScroll;
+    scrollLock.enableScroll = enableScroll;
+  }
 }
 
 init();
 },{}]},{},["L4bL"], null)
-//# sourceMappingURL=script.bad264fe.js.map
+//# sourceMappingURL=script.00d70e5c.js.map
