@@ -1,8 +1,9 @@
 @use './colors' as clr;
+@use './functions' as fn;
 
 @mixin light-mode-css-variables {
-  --text-color: #{clr.$grey-25};
-  --bg-color: #{clr.$grey-1000};
+  --text-color: #{clr.$grey-50};
+  --bg-color: #{clr.$grey-900};
   --bg-color2: #{clr.$grey-1000};
   --bg-color3: #fff;
   --menu-bg: #{clr.$grad-500};
@@ -14,6 +15,7 @@
   // --mentorship-btn-bg: #{clr.$grad-500};
   --mentorship-btn-border: #{clr.$grad-500-3};
   // --mentorship-btn-bg: transparent;
+  --nav-drop-shadow: drop-shadow(0px 0px 2px #{rgba(clr.$purple-500, 0.8)});
 }
 
 @mixin dark-mode-css-variables {
@@ -25,8 +27,9 @@
   --ham-bg: #{clr.$grad-200};
   --work-btn-bg: #{clr.$grad-700-3};
   // --mentorship-btn-bg: #{clr.$grad-500};
-  // --mentorship-btn-bg: transparent;
   --mentorship-btn-border: #{clr.$grad-400-3};
+  // --mentorship-btn-bg: transparent;
+  --nav-drop-shadow: drop-shadow(0px 0px 2px #{rgba(clr.$purple-500, 0.8)});
 }
 
 @mixin text-xs {

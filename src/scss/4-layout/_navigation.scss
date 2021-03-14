@@ -2,6 +2,10 @@
 @use '../1-helpers/functions' as fn;
 :root {
   .nav__theme {
+    &--light,
+    &--dark {
+      z-index: var(--z-theme);
+    }
     &--light {
       display: none;
     }
@@ -26,7 +30,7 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-  z-index: -1;
+  // z-index: -1;
 
   &.scroll-lock {
     width: 100%;
@@ -41,17 +45,24 @@ body {
     // @include hideScrollbar();
     // height: 100vh;
     // overflow-y: hidden;
-
-
   }
 }
 .nav {
   $nav-height: 64px;
   $poly-height: $nav-height;
+  // TODO: set multiplier 1x!
+  $multiplier: 10;
+  $ham-rotate-duration: 200ms*$multiplier;
+  $ham-hide-delay: $ham-rotate-duration * 0.2;
+  $ham-show-delay: $ham-rotate-duration * 0.8;
+  $ham-opacity-duration: $ham-rotate-duration/2;
 
-  z-index: 900;
-  * {
-    z-index: 910;
+  filter: var(--nav-drop-shadow);
+  // filter: drop-shadow(0px 0px 4px  rgba($clr,1));
+
+  z-index: var(--z-nav);
+  & > * {
+    z-index: var(--z-nav-children);
   }
   height: #{$nav-height};
   margin-bottom: #{$poly-height};
@@ -74,6 +85,7 @@ body {
 
   &--hide {
     transform: translate3d(0, -100%, 0);
+    // transform: scale3d(1,0,1);
     transition: transform 200ms ease-in;
     // hide the polygon sibling regardless of --hide!
     @mixin siblingPolygon {
@@ -88,7 +100,7 @@ body {
     }
   }
   &__logo {
-    // z-index: 200;
+    z-index: var(--z-logo);
     img {
       width: 40px;
       height: 40px;
@@ -112,30 +124,57 @@ body {
     & ~ .nav__menu {
       transform: translate3d(0, calc(100vh + #{$poly-height}), 0);
     }
+    // unchecked state!
+    & + .nav__ham .nav__ham {
+      &--small {
+        width: 45%;
+        transform-origin: 0% 0%;
+        transition: transform $ham-rotate-duration ease-in;
+      }
+      &--large {
+        width: 90%;
+        opacity: 1;
+        transition: opacity $ham-opacity-duration $ham-show-delay ease;
+      }
+    }
+    // Enabled the menu & x
     &:checked {
+      // show the menu
       & ~ .nav__menu {
         transform: translate3d(0, $nav-height + $poly-height, 0);
         // transform: translate3d(0, 178px, 0);
       }
+      // and rotate the bars
       & + .nav__ham {
+        // TODO: Remove one of these
+        // Option 1. Use siblings, and BEM friendly
+        .nav__ham {
+          &--small {
+            // first span!
+            transform: rotate(45deg) scale(2.5, 1);
+
+            // last span!
+            & ~ .nav__ham--small {
+              transform: rotate(-45deg) scale(2.5, 1);
+            }
+          }
+          // Middle span
+          &--large {
+            opacity: 0;
+            transition: opacity $ham-opacity-duration $ham-hide-delay ease-in;
+          }
+        }
+        // Option 2. n-th of type && dev friendly?
         span {
-          width: 120%;
-          transform-origin: 0% 50%;
-          transition: transform 200ms ease-in;
           &:nth-of-type(1) {
-            transform: rotate(45deg)// translate(50%, 50%);
-            // background: red;
+            transform: rotate(45deg) scale(2.5, 1);
           }
           &:nth-of-type(2) {
-            // background: green;
             opacity: 0;
-          // transform-origin: 45% 50%;
-            // transform: scale(0, 0);
-            transition: opacity 0ms ease-in;
+            transition: opacity $ham-opacity-duration $ham-hide-delay ease-in;
           }
           &:nth-of-type(3) {
-            transform: rotate(-45deg) //translate(50%, 50%);
-            // background: red;
+            transform: rotate(-45deg) scale(2.5, 1);
           }
         }
       }
@@ -149,16 +188,13 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    * {
+    z-index: var(--z-ham);
+    & > * {
+      z-index: inherit;
       background: var(--ham-bg);
       border-radius: 500px;
       height: 6px;
-    }
-    &--small {
-      width: 45%;
-    }
-    &--large {
-      width: 90%;
+      // transform: scale(100%);
     }
   }
 
@@ -171,15 +207,19 @@ body {
       height: #{$poly-height};
       display: block;
       // width: 100%;
-      left: 0;
-      right: 0;
       // flex-basis: 100%;
       top: #{$nav-height};
+      left: 0;
+      right: 0;
       background: var(--menu-bg);
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       // transform-origin: top left;
-      transform: translate3d(0, 0%, 0);
+      // transform: translate3d(0, 0%, 0);
       // translateZ to -200% or higher (if nav menu is larger than nav poly), keep it close because animation will start at given distance!
+      transform-origin: top left;
+      // height: $poly-height;
+      // transition: height 200ms ease-out;
+      // transform: scale(1,1);
       transition: transform 200ms ease-out;
       // -webkit-transition: transform 200ms ease-in-out;
       // backface-visibility: hidden;
@@ -188,7 +228,11 @@ body {
       // border-radius: 0;
     }
     &--hide:after {
-      transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -#{$poly-height}, 0);
+      transform-origin: top left;
+      // height: 0;
+      // transition: height 200ms ease-in;
+      // transform: scale(1,0);
       transition: transform 200ms ease-in;
     }
   }
@@ -278,63 +322,48 @@ body {
     display: flex;
     &__items {
       &--container {
-        display: flex;
+        // display: flex;
         justify-content: center;
         flex-basis: 100%;
-        overflow-y: auto;
+        // overflow-y: auto;
       }
       display: flex;
+      gap: 4px;
       flex-direction: column;
       justify-content: space-evenly;
       // min-height: 590px;
-      min-height: 710px; //with flex+padding
-      max-height: 990px;
+      // min-height: 710px; //with flex+padding
+      // max-height: 990px;
       list-style: none;
-      margin: 0;
       padding: 0;
+      width: fit-content;
+      margin: auto;
 
       // Want to center text?
-      align-items: center;
+      // align-items: center;
 
       &--item {
         @mixin hoverStyle($color: clr.$blue-100, $flex: 1) {
-          position: relative;
+          // position: relative;
           background: clr.$blue-100;
           -webkit-background-clip: text;
-
-          // &::before {
-          //   content: '';
-          //   position: absolute;
-
-          //   @if $flex==1 {
-          //     left: -10px;
-          //     right: -10px;
-          //     top: 5px;
-          //     bottom: 5px;
-          //   }
-          //   @if $flex!=1 {
-          //     left: 0;
-          //     right: 0;
-          //     top: 0;
-          //     bottom: 0;
-          //   }
-          // }
           border-radius: 4px;
-          border: 2px solid $color;
+          border-color: $color;
         }
         &:last-of-type {
-          a {
-            @include hoverStyle(clr.$purple-300);
-          }
+          @include hoverStyle(clr.$purple-300);
         }
         display: flex;
-        // align-items: center;
-        // width: 100%;
+        align-items: center;
+        width: 100%;
         a {
+          width: 100%;
+          text-align: center;
           // Either flex or padding!
           // display: block;
           // width: 100%;
-          padding: 10px 20px;
+          border: 2px solid transparent;
+          padding: 5px 20px;
           line-height: 2em;
 
           // text-align: center;
