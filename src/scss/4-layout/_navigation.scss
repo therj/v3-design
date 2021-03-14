@@ -30,21 +30,17 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-  // z-index: -1;
+  // @include hideScrollbar;
 
   &.scroll-lock {
-    width: 100%;
-    // position: fixed;
-    overflow-y: scroll;
     // height: 100vh;
-    // margin-left: 50%;
-    // transform: translateX(-50%);
-    // transform: translateX(50%);
-    // box-sizing: content-box;
-    // margin-right: 100px;
-    // @include hideScrollbar();
-    // height: 100vh;
-    // overflow-y: hidden;
+    // width: 100%;
+    // overflow: hidden;
+
+    // @media screen and (min-width:1300px) {
+    //   transform: translateX(-50%);
+    //   margin-left: calc(50% - 8px);
+    // }
   }
 }
 .nav {
@@ -69,7 +65,6 @@ body {
   overflow-y: visible;
   // overflow-y: hidden;
   background: var(--menu-bg);
-  outline: #fff;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -134,6 +129,11 @@ body {
     }
     // Enabled the menu & x
     &:checked {
+      // show poly
+      & + .nav__poly::after {
+        transform: inherit;
+        transform: unset; //inherit, else initial
+      }
       // show the menu
       & ~ .nav__menu {
         transform: translate3d(0, $nav-height + $poly-height, 0);
@@ -308,49 +308,37 @@ body {
     // top: 10px; // nav height
     top: 0;
     left: 0;
-    height: 100vh;
-    // can't we just have larger than screen menu?
-    height: calc(100vh - #{$nav-height+$poly-height});
-    // height: calc(100vh + 128px);
-    // padding: 2rem;
+    min-height: 100vh;
     transition: transform 200ms ease-in-out;
     display: flex;
     &__items {
       &--container {
-        // display: flex;
-        justify-content: center;
-        flex-basis: 100%;
-        // overflow-y: auto;
+        // height: fit-content;
+        // justify-content: center;
       }
       display: flex;
       gap: 4px;
       flex-direction: column;
       justify-content: space-evenly;
-      // min-height: 590px;
-      // min-height: 710px; //with flex+padding
-      // max-height: 990px;
       list-style: none;
       padding: 0;
-      width: fit-content;
-      margin: auto;
-
-      // Want to center text?
-      // align-items: center;
 
       &--item {
-        @mixin hoverStyle($color: clr.$blue-100, $flex: 1) {
-          // position: relative;
-          background: clr.$blue-100;
+        @mixin hoverStyle($color: clr.$blue-100, $bdrColor:$color) {
+          background: $color;
           -webkit-background-clip: text;
           border-radius: 4px;
-          border-color: $color;
+          border-color: $bdrColor
         }
-        &:last-of-type {
-          @include hoverStyle(clr.$purple-300);
-        }
+        // center or left!
         display: flex;
-        align-items: center;
-        width: 100%;
+
+        &:last-of-type {
+          a {
+            @include hoverStyle('X',clr.$purple-300);
+          }
+        }
+
         a {
           width: 100%;
           text-align: center;
