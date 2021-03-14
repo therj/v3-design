@@ -474,11 +474,17 @@ body .after-dot:after {
   font-size: 1.2em;
   line-height: 0;
 }
-body section :where(h1, h2, h3, h4, h5, h6, p) {
+body section h1,
+body section h2,
+body section h3,
+body section h4,
+body section h5,
+body section h6,
+body section p {
   padding: 0px var(--side-space);
   margin: var(--gap-between) auto;
 }
-body section :where(p) {
+body section p {
   margin-left: 0;
   max-width: 60ch;
 }
@@ -609,12 +615,6 @@ body.scroll-lock {
   transform: translate3d(0, -100%, 0);
   transition: transform 200ms ease-in;
 }
-.nav--hide + nav-poly {
-  transform: translate3d(0, -200%, 0);
-}
-.nav--hide + nav-poly.poly--hide {
-  transform: translate3d(0, -200%, 0);
-}
 .nav__logo {
   z-index: var(--z-logo);
 }
@@ -630,6 +630,9 @@ body.scroll-lock {
   display: block;
   height: var(--dim);
   width: var(--dim);
+}
+.nav--hide .nav__toggle ~ .nav__menu {
+  transform: translate3d(0, calc(100vh + 128px), 0);
 }
 .nav__toggle {
   display: none;
@@ -789,4 +792,4 @@ body {
   margin: auto;
 }
 
-/*# sourceMappingURL=main.489378eb.css.map */
+/*# sourceMappingURL=main.b074ad70.css.map */
