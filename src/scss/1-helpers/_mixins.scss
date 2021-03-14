@@ -17,7 +17,7 @@
 }
 
 @mixin dark-mode-css-variables {
-  --text-color: #{clr.$grey-900};
+  --text-color: #{clr.$grey-800};
   --bg-color: #{clr.$grey-75};
   --menu-bg: #{clr.$grad-700};
   --title-color-grad: #{clr.$grad-400-3};

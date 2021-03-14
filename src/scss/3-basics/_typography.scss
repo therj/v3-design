@@ -6,7 +6,6 @@
 :root {
   @mixin tran($light: 1) {
     $tra: ease-out;
-    @debug $light;
     @if $light == 1 {
       $tra: ease-in;
     }

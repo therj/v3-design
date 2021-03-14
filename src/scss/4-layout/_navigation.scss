@@ -42,23 +42,7 @@ body {
     // height: 100vh;
     // overflow-y: hidden;
 
-    // &::after {
-    //   opacity: 0;
-    //   z-index: -50;
-    //   content: '...';
-    //   display: block;
-    //   position: absolute;
-    //   left: 0;
-    //   right: 0;
-    //   top: 0;
-    //   bottom: 0;
-    //   width: 100%;
-    //   background: red;
-    //   z-index: 50;
-    //   opacity: 1;
-    //   transition: opacity 1s 300s ease-in;
-    //   transition-delay: 2000ms;
-    // }
+
   }
 }
 .nav {
@@ -133,14 +117,31 @@ body {
         transform: translate3d(0, $nav-height + $poly-height, 0);
         // transform: translate3d(0, 178px, 0);
       }
+      & + .nav__ham {
+        span {
+          width: 120%;
+          transform-origin: 0% 50%;
+          transition: transform 200ms ease-in;
+          &:nth-of-type(1) {
+            transform: rotate(45deg)// translate(50%, 50%);
+            // background: red;
+          }
+          &:nth-of-type(2) {
+            // background: green;
+            opacity: 0;
+          // transform-origin: 45% 50%;
+            // transform: scale(0, 0);
+            transition: opacity 0ms ease-in;
+          }
+          &:nth-of-type(3) {
+            transform: rotate(-45deg) //translate(50%, 50%);
+            // background: red;
+          }
+        }
+      }
     }
   }
   &__ham {
-    // &--container{
-    //   height: 40px;
-    //   width: 40px;
-    //   // padding: 10px 2px;
-    // }
     cursor: pointer;
     height: 40px;
     width: 40px;
@@ -159,18 +160,6 @@ body {
     &--large {
       width: 90%;
     }
-
-    // $small: 45%;
-    // $large: 90%;
-    // span{
-    //   width: #{$small};
-    //   &+span{
-    //     width: #{$large};
-    //     &+span{
-    //       width: #{$small};
-    //     }
-    //   }
-    // }
   }
 
   &__poly {
@@ -240,11 +229,11 @@ body {
     &::after {
       // offset-rotate: 10;
       // z-index: 4;
-      $line-width: 8px;
+      $line-width: 4px;
       content: '';
       position: absolute;
       top: -($poly-height);
-      $height: $poly-height+$line-width;
+      $height: $poly-height + $line-width;
       height: $height;
       right: 0;
       left: 0;
@@ -266,7 +255,7 @@ body {
         0 0,
         0 $line-width,
         100% $height,
-        100% calc(#{$height} - #{$line-width}),
+        100% calc(#{$height} - #{$line-width})
       );
     }
 
@@ -281,13 +270,12 @@ body {
     top: 0;
     left: 0;
     height: 100vh;
-    // animation experience would worsen if it enters from further than it should...
+    // can't we just have larger than screen menu?
     height: calc(100vh - #{$nav-height+$poly-height});
     // height: calc(100vh + 128px);
     // padding: 2rem;
     transition: transform 200ms ease-in-out;
     display: flex;
-    // display: none;
     &__items {
       &--container {
         display: flex;
@@ -295,34 +283,60 @@ body {
         flex-basis: 100%;
         overflow-y: auto;
       }
-      // flex: 1;
-      // @media screen and (min-height:450px) {
-      // display: block;
-      // flex-direction: column;
-      // justify-content: space-around;
-      // height: 100%;
-
-      // }
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-      min-height: 590px;
+      // min-height: 590px;
+      min-height: 710px; //with flex+padding
       max-height: 990px;
       list-style: none;
       margin: 0;
       padding: 0;
-      // overflow-y: auto;
+
+      // Want to center text?
+      align-items: center;
+
       &--item {
-        // display: flex;
-        // justify-content: baseline;
+        @mixin hoverStyle($color: clr.$blue-100, $flex: 1) {
+          position: relative;
+          background: clr.$blue-100;
+          -webkit-background-clip: text;
+
+          // &::before {
+          //   content: '';
+          //   position: absolute;
+
+          //   @if $flex==1 {
+          //     left: -10px;
+          //     right: -10px;
+          //     top: 5px;
+          //     bottom: 5px;
+          //   }
+          //   @if $flex!=1 {
+          //     left: 0;
+          //     right: 0;
+          //     top: 0;
+          //     bottom: 0;
+          //   }
+          // }
+          border-radius: 4px;
+          border: 2px solid $color;
+        }
+        &:last-of-type {
+          a {
+            @include hoverStyle(clr.$purple-300);
+          }
+        }
+        display: flex;
         // align-items: center;
-        // width: fit-content;
-        // margin: auto;
+        // width: 100%;
         a {
-          display: flex;
-          line-height: 2em;
-          // display: inline-block;
+          // Either flex or padding!
           // display: block;
+          // width: 100%;
+          padding: 10px 20px;
+          line-height: 2em;
+
           // text-align: center;
           // color: clr.$grey-25;
           // -webkit-background-cl
@@ -339,24 +353,7 @@ body {
 
           &:focus,
           &:hover {
-            // outline: 2px solid var(--bg-color);
-            // outline-offset: -1px;
-            position: relative;
-            background: clr.$blue-100;
-            -webkit-background-clip: text;
-
-            &::before {
-              content: '';
-              position: absolute;
-              left: -10px;
-              right: -10px;
-              top: 5px;
-              bottom: 5px;
-              border: 2px solid clr.$blue-100;
-              border-radius: 4px;
-              // border-right-width: 4px;
-              // border-left-width: 5px;
-            }
+            @include hoverStyle();
           }
         }
       }
