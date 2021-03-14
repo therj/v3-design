@@ -13,8 +13,7 @@
   }
   &[data-theme='dark'] body {
     @include tran(2);
-      // transition: text 200ms ease-in-out, background 200ms ease-in;
-
+    // transition: text 200ms ease-in-out, background 200ms ease-in;
   }
   body {
     @include tran(1);
@@ -34,15 +33,31 @@ body {
     color: var(--text-color);
     font-size: 1.2em;
     line-height: 0;
-
   }
 
   section {
-    :where(h1, h2, h3, h4, h5, h6, p) {
+    // :where supported from Chrome 88, released 19Jan, 2021
+    // are you still sure about using?
+
+    // :where(h1, h2, h3, h4, h5, h6, p) {
+    //   padding: 0px var(--side-space);
+    //   margin: var(--gap-between) auto;
+    // }
+    // :where(p) {
+    //   margin-left: 0;
+    //   max-width: 60ch;
+    // }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
       padding: 0px var(--side-space);
       margin: var(--gap-between) auto;
     }
-    :where(p){
+    p {
       margin-left: 0;
       max-width: 60ch;
     }

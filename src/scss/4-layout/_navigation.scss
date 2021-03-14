@@ -52,7 +52,7 @@ body {
   $poly-height: $nav-height;
   // TODO: set multiplier 1x!
   $multiplier: 10;
-  $ham-rotate-duration: 200ms*$multiplier;
+  $ham-rotate-duration: 200ms * $multiplier;
   $ham-hide-delay: $ham-rotate-duration * 0.2;
   $ham-show-delay: $ham-rotate-duration * 0.8;
   $ham-opacity-duration: $ham-rotate-duration/2;
@@ -87,17 +87,6 @@ body {
     transform: translate3d(0, -100%, 0);
     // transform: scale3d(1,0,1);
     transition: transform 200ms ease-in;
-    // hide the polygon sibling regardless of --hide!
-    @mixin siblingPolygon {
-      transform: translate3d(0, -200%, 0);
-    }
-    // ?? NOT !!
-    & + nav-poly {
-      @include siblingPolygon();
-      &.poly--hide {
-        @include siblingPolygon();
-      }
-    }
   }
   &__logo {
     z-index: var(--z-logo);
@@ -117,6 +106,12 @@ body {
         height: var(--dim);
         width: var(--dim);
       }
+    }
+  }
+  // when nav is hidden push menu further down (else poly-height is )
+  &--hide &__toggle {
+    & ~ .nav__menu {
+      transform: translate3d(0, calc(100vh + #{$poly-height+$nav-height}), 0);
     }
   }
   &__toggle {
