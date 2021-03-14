@@ -29,7 +29,7 @@ body {
 
   .after-dot:after {
     content: '.';
-    display: inline;
+    display: inline-block;
     color: var(--text-color);
     font-size: 1.2em;
     line-height: 0;
