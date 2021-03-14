@@ -48,11 +48,6 @@ function checkScroll() {
     //scrolled down
     direction = "UP";
   }
-  console.log("🚀 ~ file: script.js ~ line 44 ~ checkScroll ~ curScroll", curScroll)
-  // hide ploygon only
-  // if (curScroll < NAV_HEIGHT_TOTAL_PIXEL / 4 && navPoly) {
-  //   navPoly.classList.remove('nav__poly--hide')
-  // }
   if (curScroll >= NAV_POLY_SCROLL_HIDE) {
     navPoly.classList.add('nav__poly--hide')
   }
@@ -92,7 +87,9 @@ function init() {
     changeTheme(LIGHT_THEME_NAME)
     setThemeIcons(LIGHT_THEME_NAME)
   })
-  navHam.addEventListener('click', hamClick)
+  // for scroll lock
+  setObserver()
+  navToggleCheckbox.addEventListener('change', menuToggle)
   // fixed menu on reverse scroll
   window.addEventListener('scroll', checkScroll);
   // mid-scrolled reload
@@ -106,11 +103,96 @@ function changeTheme(mode) {
 }
 
 
-function hamClick() {
-  // navMenu.classList.toggle('nav__menu--hide')
-  // navToggleCheckbox.toggleAttribute('checked');
-  // navToggleCheckbox.checked = !navToggleCheckbox.checked
-  document.body.classList.toggle('scroll-lock');
+function menuToggle() {
+  // do NOT toggle: menu can exist before JS loads
+  // That'd reverse required scroll-lock behaviour in some cases!
+  if (navToggleCheckbox.checked) {
+    document.body.classList.add('scroll-lock');
+  } else {
+    document.body.classList.remove('scroll-lock');
+
+  }
+}
+
+
+function setObserver() {
+  const targetNode = document.querySelector('body');
+  let options = {
+    attributes: true, childList: false, subtree: false
+
+  }
+
+  const observer = new MutationObserver(observeMe);
+
+  observer.observe(targetNode, options)
+
+  function observeMe(mutation, observer) {
+    const theBody = mutation[0];
+    if (theBody.attributeName == "class") {
+
+      // const blocker = (e) => { e.preventDefault(); e.stopPropagation(); }
+      scrollLock()
+      if ([...document.body.classList].includes('scroll-lock')) {
+        console.log('Obeserverbee');
+        scrollLock.disableScroll()
+        // console.log("🚀 ~ file: script.js ~ line 139 ~ observeMe ~ blocker", blocker)
+      }
+      else {
+        console.log('OUT!');
+        scrollLock.enableScroll()
+      }
+    }
+
+  }
+
+
+
+  // call this to Disable
+  function scrollLock() {
+    // left: 37, up: 38, right: 39, down: 40,
+    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+    var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+    function preventDefault(e) {
+      e.preventDefault();
+    }
+    function preventDefaultForScrollKeys(e) {
+      if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+      }
+    }
+    // modern Chrome requires { passive: false } when adding event
+    let supportsPassive = false;
+    try {
+      window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () { supportsPassive = true; }
+      }));
+    } catch (e) { }
+
+    const wheelOpt = supportsPassive ? { passive: false } : false;
+    const wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+    function disableScroll() {
+
+      console.log("🚀 disableScroll")
+      // BUG: keydown for fn+home/end/pgUp/pgDown & space!
+
+      window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+      window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+      window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+      window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+    function enableScroll() {
+      console.log('🚀 Enable Scroll');
+      // BUG: wheelEvent/keyup 'wheel' NOT removed!
+      window.removeEventListener('DOMMouseScroll', preventDefault, false);
+      window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+      window.removeEventListener('touchmove', preventDefault, wheelOpt);
+      window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+    scrollLock.disableScroll = disableScroll;
+    scrollLock.enableScroll = enableScroll;
+  }
 }
 
 
