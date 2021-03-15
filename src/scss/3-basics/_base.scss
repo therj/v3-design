@@ -1,23 +1,14 @@
 @use '../1-helpers/mixins' as m;
 @use '../1-helpers/colors' as clr;
 body {
-  outline: #{clr.$grey-500}55 solid 40px;
-  // outline: red solid 20px;
-  outline-offset: -20px;
-  // .hidden {
-  //   display: none;
-  //   // opacity: 0;
-  //   transition: visibility 0s linear 300ms, opacity 300ms;
-  //   animation: hideIcon;
-  // }
-
+  outline-width:20px;
+  outline-style:  solid;
+  outline-color:  rgba(clr.$purple-500, 0.4);
   .hello {
     &__hi {
       // margin-top: 128px;
     }
     &__name {
-      // background: var(--title-color-grad);
-      // background: var(--title-color-grad);
       background: var(--title-color-grad);
       -webkit-background-clip: text;
       background-clip: text;
@@ -30,18 +21,16 @@ body {
   }
   @keyframes title-animation {
     0% {
-      background-position: 0px 0px;
+      background-position: 200% 0px;
     }
     100% {
-      background-position: 300% 0px;
+      background-position: 0% 0px;
     }
   }
   footer {
-    margin-top: 128px;
     position: relative;
-    background: var(--menu-bg);
+    background: var(--footer-bg);
     height: 200px;
-    // clip-path: polygon(0 0, 0 50%, 100% 50%);
     &:before {
       position: absolute;
       content: '';
@@ -57,6 +46,6 @@ body {
 
 .demo-images{
   // display: none;
-  height: 600px;
-  overflow: hidden;
+  // height: 600px;
+  // overflow: hidden;
 }
