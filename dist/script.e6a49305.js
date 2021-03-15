@@ -250,16 +250,16 @@ function setObserver() {
   var options = {
     attributes: true,
     childList: false,
-    subtree: false
+    subtree: false // const observer = new MutationObserver(observeMe);
+    // observer.observe(targetNode, options)
+
   };
-  var observer = new MutationObserver(observeMe);
-  observer.observe(targetNode, options);
 
   function observeMe(mutation, observer) {
     var theBody = mutation[0];
 
     if (theBody.attributeName == "class") {
-      // const blocker = (e) => { e.preventDefault(); e.stopPropagation(); }
+      // BUG: FIX THIS !!
       scrollLock();
 
       if (_toConsumableArray(document.body.classList).includes('scroll-lock')) {
@@ -311,7 +311,7 @@ function setObserver() {
     var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
     function disableScroll() {
-      console.log("🚀 disableScroll"); // BUG: keydown for fn+home/end/pgUp/pgDown & space!
+      console.log("🚀 disableScroll"); // FIXME: keydown for fn+home/end/pgUp/pgDown & space!
 
       window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 
@@ -323,7 +323,7 @@ function setObserver() {
     }
 
     function enableScroll() {
-      console.log('🚀 Enable Scroll'); // BUG: wheelEvent/keyup 'wheel' NOT removed!
+      console.log('🚀 Enable Scroll'); // FIXME: wheelEvent/keyup 'wheel' NOT removed!
 
       window.removeEventListener('DOMMouseScroll', preventDefault, false);
       window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
@@ -338,4 +338,4 @@ function setObserver() {
 
 init();
 },{}]},{},["L4bL"], null)
-//# sourceMappingURL=script.00d70e5c.js.map
+//# sourceMappingURL=script.e6a49305.js.map

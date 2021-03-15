@@ -371,8 +371,9 @@ Primary Gradient Colors (10-90)
 Gradient Colors Wide (30-70)
 ***************************/
 body {
-  outline: #606d7b55 solid 40px;
-  outline-offset: -20px;
+  outline-width: 20px;
+  outline-style: solid;
+  outline-color: rgba(107, 22, 156, 0.4);
 }
 body .hello__name {
   background: var(--title-color-grad);
@@ -386,16 +387,15 @@ body .hello__name {
 }
 @keyframes title-animation {
   0% {
-    background-position: 0px 0px;
+    background-position: 200% 0px;
   }
   100% {
-    background-position: 300% 0px;
+    background-position: 0% 0px;
   }
 }
 body footer {
-  margin-top: 128px;
   position: relative;
-  background: var(--menu-bg);
+  background: var(--footer-bg);
   height: 200px;
 }
 body footer:before {
@@ -409,23 +409,23 @@ body footer:before {
   clip-path: polygon(0 0, 0 50%, 100% 50%);
 }
 
-.demo-images {
-  height: 600px;
-  overflow: hidden;
-}
-
 :root {
-  --text-color: #121417;
-  --bg-color: #e5e8eb;
-  --bg-color2: #f5f7fa;
-  --bg-color3: #fff;
+  --text-color: #0a0a0b;
+  --bg-color: #f5f7fa;
+  --nav-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
+  --poly-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
   --menu-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
+  --footer-poly-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
+  --footer-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
   --title-color-grad: linear-gradient(90deg, #6b169c, #28169c, #6b169c);
+  --menu-text-bg: linear-gradient(90deg, #eccdfe 10%, #d4cdfe 90%);
   --ham-bg: linear-gradient(90deg, #eccdfe 10%, #d4cdfe 90%);
   --work-btn-bg: linear-gradient(90deg, #6b169c, #28169c, #6b169c);
   --work-btn-text-color: #f5f7fa;
-  --mentorship-btn-border: linear-gradient(90deg, #6b169c, #28169c, #6b169c);
+  --mentorship-btn-border: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
   --nav-drop-shadow: drop-shadow(0px 0px 2px rgba(107, 22, 156, 0.8));
+  --bg-even: rgba(255,0,0,.1);
+  --bg-odd: rgba(0,255,0,.1);
   --root-font-size: 62.5%;
   --body-font-size: 1.6rem;
   --body-font-size: 2rem;
@@ -433,18 +433,27 @@ body footer:before {
   --body-font-family: "Roboto", sans-serif;
   --body-font-weight: 400;
   --body-line-height: 1.2;
+  --line-height-lg: 1.5;
   --side-space: 20px;
-  --gap-between: 10px;
+  --gap-between: 20px;
+  --gap-between-btns: 40px;
+  --narrow-text-width: 56ch;
   --z-nav: 900;
   --z-nav-children: 910;
-  --z-logo:920;
-  --z-theme:920;
-  --z-ham:910;
+  --z-logo: 920;
+  --z-theme: 920;
+  --z-ham: 910;
 }
 :root[data-theme=dark] {
+  --bg-even: rgba(255,0,0,.05);
+  --bg-odd: rgba(0,255,0,.05);
   --text-color: #cad1d8;
   --bg-color: #191f24;
+  --nav-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
+  --poly-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
   --menu-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
+  --footer-poly-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
+  --footer-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
   --title-color-grad: linear-gradient(90deg, #c56ef7, #806ef7, #c56ef7);
   --ham-bg: linear-gradient(90deg, #d89efa 10%, #aa9efa 90%);
   --work-btn-bg: linear-gradient(90deg, #491d63, #261d63, #491d63);
@@ -474,6 +483,23 @@ body .after-dot:after {
   font-size: 1.2em;
   line-height: 0;
 }
+body section {
+  min-height: 500px;
+  padding: 64px var(--side-space);
+  padding-bottom: 32px;
+}
+body section:nth-of-type(2n) {
+  background: var(--bg-even);
+}
+body section:nth-of-type(2n + 1) {
+  background: var(--bg-odd);
+}
+body section:first-of-type {
+  margin-top: -64px;
+}
+body section:last-of-type {
+  padding-bottom: 64px;
+}
 body section h1,
 body section h2,
 body section h3,
@@ -481,95 +507,82 @@ body section h4,
 body section h5,
 body section h6,
 body section p {
-  padding: 0px var(--side-space);
   margin: var(--gap-between) auto;
 }
 body section p {
   margin-left: 0;
-  max-width: 60ch;
 }
 body section .hello__hi {
   margin-bottom: 0;
 }
 body section .hello__name {
+  font-family: var(--title-font-family);
   margin-top: 0;
 }
 body section .hello__intro--short {
   font-weight: bold;
-  margin-bottom: 1em;
+  font-size: 2.5rem;
 }
 body section .hello__intro--long {
-  line-height: 1.5;
+  font-size: 2.5rem;
+  line-height: var(--line-height-lg);
+  max-width: var(--narrow-text-width);
 }
 body section .cta {
+  font-size: 2.5rem;
+  max-width: var(--narrow-text-width);
   display: flex;
-  margin: 64px var(--side-space);
-  margin-bottom: 128px;
+  margin-top: 64px;
   flex-direction: row;
-  gap: var(--gap-between);
+  gap: var(--gap-between-btns);
   flex-wrap: wrap;
   align-items: center;
   align-items: stretch;
 }
 body section .cta__btn {
   flex-grow: 1;
-  background-color: red;
   text-align: center;
-  padding: 30px;
+  padding: 20px 40px;
   text-decoration: none;
-  font-size: 2.4rem;
-  line-height: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--text-color);
 }
 body section .cta__btn--work {
-  margin-top: -5px;
-  padding-top: 35px;
-  padding-bottom: 35px;
   background: var(--work-btn-bg);
   color: var(--work-btn-text-color);
-  background-size: 300%;
-  animation: title-animation 16s infinite;
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  transition: 400ms all;
+}
+body section .cta__btn--work:hover {
+  background-position: 100% 50%;
+  transition: 400ms all;
 }
 body section .cta__btn--mentorship {
-  position: relative;
-  height: calc(100% - 10px);
+  border: 4px solid #6b169c;
+  transition: all 400ms;
 }
-body section .cta__btn--mentorship > * {
-  position: relative;
-  z-index: 3;
-}
-body section .cta__btn--mentorship::before {
-  z-index: 1;
-  content: "";
-  background: var(--mentorship-btn-border);
-  animation: title-animation 8s infinite;
-  background-size: 300%;
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: calc(100% + 10px);
-  height: calc(100% + 10px);
-}
-body section .cta__btn--mentorship::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-color);
-  z-index: 2;
+body section .cta__btn--mentorship:hover {
+  transition: all 400ms;
+  border-color: #28169c;
 }
 body h2 {
   text-align: center;
 }
 
-[data-theme=dark] img,
-img.force-dark {
+[data-theme=dark] img, .force-dark {
   filter: grayscale(30%) brightness(0.8) contrast(1.2);
 }
-[data-theme=dark] img.no-dark,
-img.force-dark.no-dark {
+[data-theme=dark] img.no-dark, .force-dark.no-dark {
+  filter: unset;
+}
+
+[data-theme=dark] .can-go-dark {
+  filter: grayscale(30%) brightness(0.8) contrast(1.2);
+}
+[data-theme=dark] .can-go-dark.no-dark {
   filter: unset;
 }
 
@@ -592,7 +605,7 @@ img.force-dark.no-dark {
   height: 64px;
   margin-bottom: 64px;
   overflow-y: visible;
-  background: var(--menu-bg);
+  background: var(--nav-bg);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -695,7 +708,7 @@ img.force-dark.no-dark {
   top: 64px;
   left: 0;
   right: 0;
-  background: var(--menu-bg);
+  background: var(--poly-bg);
   clip-path: polygon(0 0, 100% 100%, 100% 0);
   transform-origin: top left;
   transition: transform 200ms ease-out;
@@ -714,16 +727,14 @@ img.force-dark.no-dark {
   width: 100%;
   top: 0;
   left: 0;
-  min-height: 100vh;
+  min-height: calc(100vh - 128px);
   transition: transform 200ms ease-in-out;
   display: flex;
 }
 .nav__menu::before {
   content: "";
   position: absolute;
-  top: -66px;
   top: -64px;
-  height: 66px;
   height: 64px;
   right: 0;
   left: 0;
@@ -763,7 +774,7 @@ img.force-dark.no-dark {
   border: 2px solid transparent;
   padding: 5px 20px;
   line-height: 2em;
-  background: var(--ham-bg);
+  background: var(--menu-text-bg);
   -webkit-background-clip: text;
   background-size: 100%;
   color: transparent;
@@ -781,4 +792,4 @@ body {
   margin: auto;
 }
 
-/*# sourceMappingURL=main.8c1a9c5f.css.map */
+/*# sourceMappingURL=main.b5c4d7f7.css.map */
