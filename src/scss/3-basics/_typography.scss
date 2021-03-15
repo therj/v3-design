@@ -1,5 +1,7 @@
 @use '../1-helpers' as help;
 @use '../1-helpers/mixins' as m;
+@use '../1-helpers/colors' as clr;
+@use '../3-basics/global' as g;
 
 //
 
@@ -47,6 +49,23 @@ body {
     //   margin-left: 0;
     //   max-width: 60ch;
     // }
+    min-height: 500px;
+    padding: 64px var(--side-space);
+    // padding-top: 64px;
+    padding-bottom: 32px;
+    &:nth-of-type(2n) {
+      background: var(--bg-even);
+    }
+    &:nth-of-type(2n + 1) {
+      background: var(--bg-odd);
+    }
+    &:first-of-type {
+      margin-top: -#{g.$poly-height};
+    }
+    &:last-of-type {
+      padding-bottom: g.$poly-height;
+    }
+
     h1,
     h2,
     h3,
@@ -54,114 +73,70 @@ body {
     h5,
     h6,
     p {
-      padding: 0px var(--side-space);
       margin: var(--gap-between) auto;
     }
     p {
       margin-left: 0;
-      max-width: 60ch;
     }
     .hello {
-      // margin-bottom: 200px;
       &__hi {
         margin-bottom: 0;
       }
       &__name {
+        font-family: var(--title-font-family);
         margin-top: 0;
       }
       &__intro {
         &--short {
           font-weight: bold;
-          margin-bottom: 1em;
+          font-size: 2.5rem;
         }
         &--long {
-          line-height: 1.5;
+          font-size: 2.5rem;
+          line-height: var(--line-height-lg);
+          max-width: var(--narrow-text-width);
         }
       }
     }
     .cta {
+      font-size: 2.5rem;
+      max-width: var(--narrow-text-width);
       display: flex;
-      margin: 64px var(--side-space);
-      margin-bottom: 128px;
+      margin-top: 64px;
       flex-direction: row;
-      gap: var(--gap-between);
+      gap: var(--gap-between-btns);
       flex-wrap: wrap;
       align-items: center;
-      // justify-content: center;
       align-items: stretch;
+
       &__btn {
         flex-grow: 1;
-        // max-width: 8em;
-        background-color: red;
         text-align: center;
-        padding: 30px;
-        // font-size: 2.4rem;
-        // min-width: 384px;
+        padding: 20px 40px;
         text-decoration: none;
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-        @include m.text-l;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         color: var(--text-color);
         &--work {
-          margin-top: -5px;
-          padding-top: 35px;
-          padding-bottom: 35px;
-          // background-color: green;
-          // background: clr.$grad-500-3;
-          // transition: backgroun;
           background: var(--work-btn-bg);
           color: var(--work-btn-text-color);
-          // color: transparent;
-          // -webkit-background-clip: text;
-          // background-clip: text;
-          // -webkit-background-clip: text;
-          // color: transparent;
-          background-size: 300%;
-          animation: title-animation 16s infinite;
-          // font-weight: 700;
-          // font-size: 5rem;
+          background-size: 200% 100%;
+          background-position: 0% 50%;
+          transition: 400ms all;
+
+          &:hover {
+            background-position: 100% 50%;
+            transition: 400ms all;
+          }
         }
         &--mentorship {
-          // background: var(--mentorship-btn-bg);
-          // border: var(--mentorship-btn-border);
-          // background: red;
-          // color: red;
-          // flex-grow: 2;
-          position: relative;
-          // z-index: 20;
-          // z-index: 1;
-          // width: calc(100% - 10px);
-          height: calc(100% - 10px);
-          & > * {
-            position: relative;
-            z-index: 3;
-          }
-          &::before {
-            z-index: 1;
-            content: '';
-            background: var(--mentorship-btn-border);
-            // background: linear-gradient(90deg, red, green, red);
-            animation: title-animation 8s infinite;
-            background-size: 300%;
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            width: calc(100% + 10px);
-            height: calc(100% + 10px);
-            // z-index: 5;
-            // border-radius: 12px;
-          }
-          &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-color);
-            z-index: 2;
-            // border-radius: 8px;
+          border: 4px solid clr.$purple-500;
+          transition: all 400ms;
+          &:hover {
+            transition: all 400ms;
+            border-color: clr.$blue-500;
           }
         }
       }
