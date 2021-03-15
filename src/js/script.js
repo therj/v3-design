@@ -122,15 +122,14 @@ function setObserver() {
 
   }
 
-  const observer = new MutationObserver(observeMe);
+  // const observer = new MutationObserver(observeMe);
 
-  observer.observe(targetNode, options)
+  // observer.observe(targetNode, options)
 
   function observeMe(mutation, observer) {
     const theBody = mutation[0];
     if (theBody.attributeName == "class") {
-
-      // const blocker = (e) => { e.preventDefault(); e.stopPropagation(); }
+      // BUG: FIX THIS !!
       scrollLock()
       if ([...document.body.classList].includes('scroll-lock')) {
         console.log('Obeserverbee');
@@ -175,7 +174,7 @@ function setObserver() {
     function disableScroll() {
 
       console.log("🚀 disableScroll")
-      // BUG: keydown for fn+home/end/pgUp/pgDown & space!
+      // FIXME: keydown for fn+home/end/pgUp/pgDown & space!
 
       window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
       window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
@@ -184,7 +183,7 @@ function setObserver() {
     }
     function enableScroll() {
       console.log('🚀 Enable Scroll');
-      // BUG: wheelEvent/keyup 'wheel' NOT removed!
+      // FIXME: wheelEvent/keyup 'wheel' NOT removed!
       window.removeEventListener('DOMMouseScroll', preventDefault, false);
       window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
       window.removeEventListener('touchmove', preventDefault, wheelOpt);
