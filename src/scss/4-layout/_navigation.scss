@@ -1,5 +1,8 @@
+
 @use '../1-helpers/colors' as clr;
 @use '../1-helpers/functions' as fn;
+@use '../3-basics/global' as g;
+
 :root {
   .nav__theme {
     &--light,
@@ -44,8 +47,8 @@ body {
   }
 }
 .nav {
-  $nav-height: 64px;
-  $poly-height: $nav-height;
+  $nav-height: g.$nav-height;
+  $poly-height: g.$poly-height;
   // TODO: set multiplier 1x!
   $multiplier: 10;
   $ham-rotate-duration: 200ms * $multiplier;
@@ -64,7 +67,7 @@ body {
   margin-bottom: #{$poly-height};
   overflow-y: visible;
   // overflow-y: hidden;
-  background: var(--menu-bg);
+  background: var(--nav-bg);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -206,7 +209,7 @@ body {
       top: #{$nav-height};
       left: 0;
       right: 0;
-      background: var(--menu-bg);
+      background: var(--poly-bg);
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       // transform-origin: top left;
       // transform: translate3d(0, 0%, 0);
@@ -247,12 +250,12 @@ body {
       // render leak on top when ::after is disabled,
       // bottom leak when after is disabled and __menu top: -ve height is odd number!
       // Upper/lower nav-poly won't be paralled anyomore!
-      top: -#{$poly-height + 2px};
+      // top: -#{$poly-height + 2px};
       top: -$poly-height;
       // top: 20px;
       // top: 64px;
       // bottom leak when after is disabled and __menu top: +ve height is odd number!
-      height: $poly-height + 2px;
+      // height: $poly-height + 2px;
       height: $poly-height;
       // z-index: 45;
       right: 0;
@@ -308,7 +311,9 @@ body {
     // top: 10px; // nav height
     top: 0;
     left: 0;
-    min-height: 100vh;
+    // min-height: 100vh;
+    // if you don't have content to scroll, don't make it go beyond screen to 100vh (pushed by nav+poly)...
+    min-height: calc(100vh - #{$nav-height+$poly-height});
     transition: transform 200ms ease-in-out;
     display: flex;
     &__items {
@@ -354,7 +359,7 @@ body {
           // -webkit-background-cl
           // -webkit-background-clip: text;
           // background-clip: text;
-          background: var(--ham-bg);
+          background: var(--menu-text-bg);
           // background: clr.$grad-300;
           -webkit-background-clip: text;
           // background-clip: text;
