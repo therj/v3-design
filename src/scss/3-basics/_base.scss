@@ -10,18 +10,19 @@ body {
     }
     &__name {
       background: var(--title-color-grad);
+      // background: linear-gradient(90deg, red, green, red);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       background-size: 300%;
-      animation: title-animation 16s linear infinite;
-      font-weight: 700;
+      animation: title-animation 32s linear infinite;
+      font-weight: 600;
       font-size: 5rem;
     }
   }
   @keyframes title-animation {
     0% {
-      background-position: 200% 0px;
+      background-position: 300% 0px;
     }
     100% {
       background-position: 0% 0px;
@@ -29,7 +30,7 @@ body {
   }
   footer {
     position: relative;
-    background: var(--footer-bg);
+    background: var(--nav-bg);
     height: 200px;
     &:before {
       position: absolute;
@@ -38,7 +39,7 @@ body {
       right: 0;
       top: -64px;
       height: 128px;
-      background: var(--menu-bg);
+      background: inherit;
       clip-path: polygon(0 0, 0 50%, 100% 50%);
     }
   }

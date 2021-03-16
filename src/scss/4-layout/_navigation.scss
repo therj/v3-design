@@ -1,4 +1,3 @@
-
 @use '../1-helpers/colors' as clr;
 @use '../1-helpers/functions' as fn;
 @use '../3-basics/global' as g;
@@ -197,40 +196,23 @@ body {
   }
 
   &__poly {
+      background: inherit;
+      background-size: 0;
     &:after {
-      // no index will display over open menu
-      // z-index: 49; //less than nav
       content: '';
       position: absolute;
       height: #{$poly-height};
       display: block;
-      // width: 100%;
-      // flex-basis: 100%;
       top: #{$nav-height};
       left: 0;
       right: 0;
-      background: var(--poly-bg);
+      background: inherit;
+      background-size: 100%;
       clip-path: polygon(0 0, 100% 100%, 100% 0);
-      // transform-origin: top left;
-      // transform: translate3d(0, 0%, 0);
-      // translateZ to -200% or higher (if nav menu is larger than nav poly), keep it close because animation will start at given distance!
-      transform-origin: top left;
-      // height: $poly-height;
-      // transition: height 200ms ease-out;
-      // transform: scale(1,1);
       transition: transform 200ms ease-out;
-      // -webkit-transition: transform 200ms ease-in-out;
-      // backface-visibility: hidden;
-      // outline: 1px solid transparent;
-      // outline-offset: -5px;
-      // border-radius: 0;
     }
     &--hide:after {
       transform: translate3d(0, -#{$poly-height}, 0);
-      transform-origin: top left;
-      // height: 0;
-      // transition: height 200ms ease-in;
-      // transform: scale(1,0);
       transition: transform 200ms ease-in;
     }
   }
@@ -241,36 +223,19 @@ body {
     // padding-top: 16px;
 
     &::before {
-      // z-index: 4;
       content: '';
-      // background: red;
-      // z-index: 400;
       position: absolute;
-      // 2px for safety
-      // render leak on top when ::after is disabled,
-      // bottom leak when after is disabled and __menu top: -ve height is odd number!
-      // Upper/lower nav-poly won't be paralled anyomore!
-      // top: -#{$poly-height + 2px};
       top: -$poly-height;
-      // top: 20px;
-      // top: 64px;
-      // bottom leak when after is disabled and __menu top: +ve height is odd number!
-      // height: $poly-height + 2px;
       height: $poly-height;
-      // z-index: 45;
       right: 0;
       left: 0;
       background: inherit;
       // background: lightcoral;
       // background: rgba(lightcoral, 60%);
-      // clip-path: polygon(0 0px, 0 100%, 100% 100%, 100% calc(100% - 16px));
       clip-path: polygon(0 0px, 0 100%, 100% 100%);
-      // clip-path: polygon(100% 100%, 100% 0, 0 0);
     }
 
     &::after {
-      // offset-rotate: 10;
-      // z-index: 4;
       $line-width: 4px;
       content: '';
       position: absolute;
@@ -279,41 +244,27 @@ body {
       height: $height;
       right: 0;
       left: 0;
-      // background: var(--bg-color);
       background: var(--bg-color);
-      // background: rgba(rgb(136, 255, 0), 40%);
-      // background: white;
-      // box-shadow: white;
-      // box-shadow: inset 10px 10px 5px 400px var(--bg-color);
-
-      // z-index: -3;
-      // width: 120%;
-      // transform-origin: 50% 50%;
-      // transform: rotate(7.5deg);
-      // clip-path: polygon(0 0, 0 4px, 100% 4px, 100% 128px);
-      // clip-path: polygon(0 0, 100% 84%, 100% 100%, 0 18%);
-      // clip-path: polygon(0 0, 0 24px, 100% 100%, 100% calc(100% - 24px));
       clip-path: polygon(
         0 0,
         0 $line-width,
         100% $height,
-        100% calc(#{$height} - #{$line-width})
+        100% $height - $line-width
       );
     }
 
-    background: var(--menu-bg);
+    background: inherit;
     font-weight: bold;
     font-size: 3rem;
-    // display: flex;
     justify-content: center;
     position: absolute;
     width: 100%;
-    // top: 10px; // nav height
     top: 0;
     left: 0;
-    // min-height: 100vh;
-    // if you don't have content to scroll, don't make it go beyond screen to 100vh (pushed by nav+poly)...
+    // nav on
     min-height: calc(100vh - #{$nav-height+$poly-height});
+    // nav off
+    min-height: calc(100vh - #{$poly-height});
     transition: transform 200ms ease-in-out;
     display: flex;
     &__items {
@@ -329,43 +280,32 @@ body {
       padding: 0;
 
       &--item {
-        @mixin hoverStyle($color: clr.$blue-100, $bdrColor:$color) {
+        @mixin hoverStyle($color: clr.$blue-100, $bdrColor: $color) {
           background: $color;
           -webkit-background-clip: text;
-          border-radius: 4px;
-          border-color: $bdrColor
+          border-color: $bdrColor;
         }
         // center or left!
         display: flex;
 
         &:last-of-type {
           a {
-            @include hoverStyle('X',clr.$purple-300);
+            @include hoverStyle('X', clr.$purple-300);
           }
         }
 
         a {
           width: 100%;
           text-align: center;
-          // Either flex or padding!
-          // display: block;
-          // width: 100%;
           border: 2px solid transparent;
+          // border-radius: 4px;
           padding: 5px 20px;
           line-height: 2em;
-
-          // text-align: center;
-          // color: clr.$grey-25;
-          // -webkit-background-cl
-          // -webkit-background-clip: text;
-          // background-clip: text;
           background: var(--menu-text-bg);
-          // background: clr.$grad-300;
-          -webkit-background-clip: text;
           // background-clip: text;
+          -webkit-background-clip: text;
           background-size: 100%;
           color: transparent;
-          // background: var(--ham-bg);
           text-decoration: none;
 
           &:focus,
