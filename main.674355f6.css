@@ -381,13 +381,13 @@ body .hello__name {
   background-clip: text;
   color: transparent;
   background-size: 300%;
-  animation: title-animation 16s linear infinite;
-  font-weight: 700;
+  animation: title-animation 32s linear infinite;
+  font-weight: 600;
   font-size: 5rem;
 }
 @keyframes title-animation {
   0% {
-    background-position: 200% 0px;
+    background-position: 300% 0px;
   }
   100% {
     background-position: 0% 0px;
@@ -395,7 +395,7 @@ body .hello__name {
 }
 body footer {
   position: relative;
-  background: var(--footer-bg);
+  background: var(--nav-bg);
   height: 200px;
 }
 body footer:before {
@@ -405,7 +405,7 @@ body footer:before {
   right: 0;
   top: -64px;
   height: 128px;
-  background: var(--menu-bg);
+  background: inherit;
   clip-path: polygon(0 0, 0 50%, 100% 50%);
 }
 
@@ -413,19 +413,15 @@ body footer:before {
   --text-color: #0a0a0b;
   --bg-color: #f5f7fa;
   --nav-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
-  --poly-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
-  --menu-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
-  --footer-poly-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
-  --footer-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
   --title-color-grad: linear-gradient(90deg, #6b169c, #28169c, #6b169c);
   --menu-text-bg: linear-gradient(90deg, #eccdfe 10%, #d4cdfe 90%);
   --ham-bg: linear-gradient(90deg, #eccdfe 10%, #d4cdfe 90%);
-  --work-btn-bg: linear-gradient(90deg, #6b169c, #28169c, #6b169c);
+  --work-btn-bg: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
   --work-btn-text-color: #f5f7fa;
   --mentorship-btn-border: linear-gradient(90deg, #6b169c 10%, #28169c 90%);
   --nav-drop-shadow: drop-shadow(0px 0px 2px rgba(107, 22, 156, 0.8));
-  --bg-even: rgba(255,0,0,.1);
-  --bg-odd: rgba(0,255,0,.1);
+  --bg-even: rgba(255,0,0,.02);
+  --bg-odd: rgba(0,255,0,.02);
   --root-font-size: 62.5%;
   --body-font-size: 1.6rem;
   --body-font-size: 2rem;
@@ -445,18 +441,15 @@ body footer:before {
   --z-ham: 910;
 }
 :root[data-theme=dark] {
-  --bg-even: rgba(255,0,0,.05);
-  --bg-odd: rgba(0,255,0,.05);
+  --bg-even: rgba(255,0,0,.02);
+  --bg-odd: rgba(0,255,0,.02);
   --text-color: #cad1d8;
   --bg-color: #191f24;
   --nav-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
-  --poly-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
-  --menu-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
-  --footer-poly-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
-  --footer-bg: linear-gradient(90deg, #5a1b7e 10%, #281b7e 90%);
   --title-color-grad: linear-gradient(90deg, #c56ef7, #806ef7, #c56ef7);
+  --menu-text-bg: linear-gradient(90deg, #d89efa 10%, #aa9efa 90%);
   --ham-bg: linear-gradient(90deg, #d89efa 10%, #aa9efa 90%);
-  --work-btn-bg: linear-gradient(90deg, #491d63, #261d63, #491d63);
+  --work-btn-bg: linear-gradient(90deg, #491d63 10%, #261d63 90%);
   --mentorship-btn-border: linear-gradient(90deg, #c56ef7, #806ef7, #c56ef7);
   --nav-drop-shadow: drop-shadow(0px 0px 2px rgba(90, 27, 126, 0.8));
 }
@@ -553,19 +546,19 @@ body section .cta__btn--work {
   background: var(--work-btn-bg);
   color: var(--work-btn-text-color);
   background-size: 200% 100%;
-  background-position: 0% 50%;
-  transition: 400ms all;
+  background-position: 100% 0%;
+  transition: all 400ms ease-in;
 }
 body section .cta__btn--work:hover {
-  background-position: 100% 50%;
-  transition: 400ms all;
+  background-position: 200% 0%;
+  transition: all 400ms ease-out;
 }
 body section .cta__btn--mentorship {
   border: 4px solid #6b169c;
-  transition: all 400ms;
+  transition: all 400ms ease;
 }
 body section .cta__btn--mentorship:hover {
-  transition: all 400ms;
+  transition: all 400ms ease;
   border-color: #28169c;
 }
 body h2 {
@@ -700,6 +693,10 @@ body h2 {
   border-radius: 500px;
   height: 6px;
 }
+.nav__poly {
+  background: inherit;
+  background-size: 0;
+}
 .nav__poly:after {
   content: "";
   position: absolute;
@@ -708,18 +705,17 @@ body h2 {
   top: 64px;
   left: 0;
   right: 0;
-  background: var(--poly-bg);
+  background: inherit;
+  background-size: 100%;
   clip-path: polygon(0 0, 100% 100%, 100% 0);
-  transform-origin: top left;
   transition: transform 200ms ease-out;
 }
 .nav__poly--hide:after {
   transform: translate3d(0, -64px, 0);
-  transform-origin: top left;
   transition: transform 200ms ease-in;
 }
 .nav__menu {
-  background: var(--menu-bg);
+  background: inherit;
   font-weight: bold;
   font-size: 3rem;
   justify-content: center;
@@ -728,6 +724,7 @@ body h2 {
   top: 0;
   left: 0;
   min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 64px);
   transition: transform 200ms ease-in-out;
   display: flex;
 }
@@ -749,7 +746,7 @@ body h2 {
   right: 0;
   left: 0;
   background: var(--bg-color);
-  clip-path: polygon(0 0, 0 4px, 100% 68px, 100% calc(68px - 4px));
+  clip-path: polygon(0 0, 0 4px, 100% 68px, 100% 64px);
 }
 .nav__menu__items {
   display: flex;
@@ -765,7 +762,6 @@ body h2 {
 .nav__menu__items--item:last-of-type a {
   background: "X";
   -webkit-background-clip: text;
-  border-radius: 4px;
   border-color: #d89efa;
 }
 .nav__menu__items--item a {
@@ -783,7 +779,6 @@ body h2 {
 .nav__menu__items--item a:focus, .nav__menu__items--item a:hover {
   background: #eae7fe;
   -webkit-background-clip: text;
-  border-radius: 4px;
   border-color: #eae7fe;
 }
 
@@ -792,4 +787,4 @@ body {
   margin: auto;
 }
 
-/*# sourceMappingURL=main.b5c4d7f7.css.map */
+/*# sourceMappingURL=main.674355f6.css.map */
