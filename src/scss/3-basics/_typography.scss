@@ -123,19 +123,19 @@ body {
           background: var(--work-btn-bg);
           color: var(--work-btn-text-color);
           background-size: 200% 100%;
-          background-position: 0% 50%;
-          transition: 400ms all;
+          background-position: 100% 0%;
+          transition: all 400ms ease-in;
 
           &:hover {
-            background-position: 100% 50%;
-            transition: 400ms all;
+            background-position: 200% 0%;
+            transition: all 400ms ease-out;
           }
         }
         &--mentorship {
           border: 4px solid clr.$purple-500;
-          transition: all 400ms;
+          transition: all 400ms ease;
           &:hover {
-            transition: all 400ms;
+            transition: all 400ms ease;
             border-color: clr.$blue-500;
           }
         }
