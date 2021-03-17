@@ -133,6 +133,7 @@ body {
     &:checked {
       // show poly
       & + .nav__poly::after {
+        pointer-events: none;
         transform: inherit;
         transform: unset; //inherit, else initial
       }
@@ -196,8 +197,8 @@ body {
   }
 
   &__poly {
-      background: inherit;
-      background-size: 0;
+    background: inherit;
+    background-size: 0;
     &:after {
       content: '';
       position: absolute;
