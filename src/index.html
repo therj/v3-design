@@ -14,7 +14,10 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Navbar start -->
@@ -87,12 +90,110 @@
       </div>
     </section>
     <section class="recent">
-      <h2>Recent Updates</h2>
+      <h2 class="recent__section-title">Recent Updates</h2>
+      <!-- Bugmentor card -->
+      <div class="recent__card recent__card__external">
+        <a href="" class="recent__card__external__link">
+          <img
+            class="recent__card__external__link--image"
+            src="https://picsum.photos/id/30/960/600"
+            alt="recent__card__external featured image"
+          />
+        </a>
+        <div class="recent__card__external__content">
+          <a href="" class="recent__card__external__content__link">
+            <h3 class="recent__card__external__content__link--title">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </h3>
+            <p class="recent__card__external__content__link--excerpt">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
+              reprehenderit similique enim hic quisquam amet totam laudantium
+              odio. Consequatur deserunt quo, quae necessitatibus molestias
+              facilis magnam a non laborum consectetur nobis obcaecati, quaerat,
+              aut numquam expedita reiciendis at excepturi deleniti. Rem quasi
+              ex nulla. Dolor.
+            </p>
+          </a>
+          <div class="recent__card__external__content--footer">
+            <a
+              class="recent__card__external__content__link--footer--read-more"
+              href="http://"
+              >Read More</a
+            >
+            <a
+              class="recent__card__external__content__link--footer--visit"
+              href="http://"
+              >Visit bugmentor</a
+            >
+          </div>
+          <a class="recent__card__external--ribbon" href="http://">bugmentor</a>
+        </div>
+      </div>
+      <!-- Blog Card -->
+      <div class="recent__card recent__card__blog">
+        <a href="" class="recent__card__blog__link">
+          <img
+            class="recent__card__blog__link--image"
+            src="https://picsum.photos/id/838/960/600"
+            alt="blog featured image"
+          />
+        </a>
+        <div class="recent__card__blog__content">
+          <a href="" class="recent__card__blog__content__link">
+            <h3 class="recent__card__blog__content__link--title">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+              officiis commodi quasi, eaque officia ab!
+            </h3>
+            <p class="recent__card__blog__content__link--excerpt">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+              modi, optio ducimus sed minus maxime quos rerum dicta praesentium,
+              harum, sit possimus aliquid consectetur. Vel.
+            </p>
+          </a>
+          <div class="recent__card__blog__content--footer">
+            <a
+              class="recent__card__blog__content__link--footer--read-more"
+              href="http://"
+              >Read More</a
+            >
+            <a
+              class="recent__card__blog__content__link--footer--visit"
+              href="http://"
+              >Visit blog</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Podcast card -->
+      <div class="recent__card recent__card__podcast">
+        <h3 class="recent__card__podcast--section-title">Featured Podcasts</h3>
+        <div class="recent__card__podcast__list">
+          <div class="recent__card__podcast__list--item">
+            <div class="recent__card__podcast__list--btn pause">(P)</div>
+            <div class="recent__card__podcast--title">
+              07: veth eaul  om ynfe ( साय मूपैल्को)
+            </div>
+            <div class="recent__card__podcast--date">Sep 4, 2020</div>
+            <div class="recent__card__podcast--duration">21:06</div>
+            <div class="recent__card__podcast--progress" data-progress="0.5">
+              50%
+            </div>
+          </div>
+          <div class="recent__card__podcast__list--item"></div>
+          <div class="recent__card__podcast__list--item"></div>
+          <div class="recent__card__podcast__list--item"></div>
+          <div class="recent__card__podcast__list--item"></div>
+          <div class="recent__card__podcast__list--more">
+            View all on anchor.fm
+          </div>
+        </div>
+      </div>
     </section>
     <section class="demo-images">
       <h2>Picsum Images for Nothing</h2>
       <div
-      class="can-go-dark"
+        class="can-go-dark"
         style="
           background-image: url(https://picsum.photos/id/30/960/600);
           width: 100%;
@@ -105,7 +206,7 @@
       ></div>
 
       <div
-      class="can-go-dark"
+        class="can-go-dark"
         style="
           background-image: url(https://picsum.photos/id/838/960/600);
           width: 100%;
@@ -118,7 +219,7 @@
       ></div>
 
       <div
-      class="can-go-dark"
+        class="can-go-dark"
         style="
           background-image: url(https://picsum.photos/id/982/960/600);
           width: 100%;
