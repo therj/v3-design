@@ -133,7 +133,6 @@ body {
     &:checked {
       // show poly
       & + .nav__poly::after {
-        pointer-events: none;
         transform: inherit;
         transform: unset; //inherit, else initial
       }
@@ -200,6 +199,7 @@ body {
     background: inherit;
     background-size: 0;
     &:after {
+      pointer-events: none;
       content: '';
       position: absolute;
       height: #{$poly-height};

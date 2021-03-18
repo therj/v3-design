@@ -87,6 +87,10 @@ function init() {
     changeTheme(LIGHT_THEME_NAME)
     setThemeIcons(LIGHT_THEME_NAME)
   })
+
+  // for podcasts
+  podcastPlayerHandler();
+
   // for scroll lock
   setObserver()
   navToggleCheckbox.addEventListener('change', menuToggle)
@@ -194,5 +198,25 @@ function setObserver() {
   }
 }
 
+function podcastPlayerHandler(params) {
+  const podcasts = document.querySelectorAll('.recent__card__podcast__list--item')
+  const podcastsWithSources = [];
+
+  podcasts.forEach(pod => {
+    if (pod.dataset.src) {
+      console.log('SRC');
+      podcastsWithSources.push(pod)
+    }
+  })
+  // console.log("🚀 ~ file: script.js ~ line 206 ~ podcastPlayerHandler ~ podcastsWithSources", podcastsWithSources)
+  const audioContainer = []
+
+  podcastsWithSources.forEach(cast => {
+    const currentAudio = new Audio(cast.dataset.src)
+    console.log("🚀 ~ file: script.js ~ line 216 ~ podcastPlayerHandler ~ currentAudio", currentAudio)
+  })
+
+
+}
 
 init()
