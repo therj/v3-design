@@ -89,7 +89,7 @@ function init() {
   })
 
   // for podcasts
-  podcastPlayerHandler();
+  podcastPlayerHandlerObserver();
 
   // for scroll lock
   setObserver()
@@ -199,24 +199,153 @@ function setObserver() {
 }
 
 function podcastPlayerHandler(params) {
-  const podcasts = document.querySelectorAll('.recent__card__podcast__list--item')
-  const podcastsWithSources = [];
+  const itemSelector = '.recent__card__podcast__list--item';
+  const toggleIconSelector = `${itemSelector}__heading--btn`
+  const progressSelector = `${itemSelector}__progress`
+  const plusMinusSelector = `${itemSelector}__plusminus`
+  const podcasts = document.querySelectorAll(itemSelector)
 
-  podcasts.forEach(pod => {
-    if (pod.dataset.src) {
-      console.log('SRC');
-      podcastsWithSources.push(pod)
+  for (let i = 0; i < podcasts.length; i++) {
+    const element = podcasts[i];
+    const theButton = element.querySelector(toggleIconSelector);
+    const theAudio = element.querySelector('audio');
+    const theBar = element.querySelector(progressSelector);
+    const plusMinus = element.querySelector(plusMinusSelector)
+    const plus10 = plusMinus.querySelector('.plus10')
+    const plus30 = plusMinus.querySelector('.plus30')
+    const minus10 = plusMinus.querySelector('.minus10')
+    const minus30 = plusMinus.querySelector('.minus30')
+
+    if (!theAudio) continue;
+
+    // Play pause button
+    theButton.addEventListener('click', (e) => {
+      if (theAudio.paused) {
+        theAudio.play()
+        console.log('Playing!');
+      }
+      else {
+        theAudio.pause()
+        console.log('Paused!');
+      }
+    })
+    //
+    // change progress bar
+    theAudio.addEventListener('timeupdate', (event) => {
+      const progress = element.querySelector(progressSelector)
+      const played = progress.querySelector(`${progressSelector}--played`);
+      played.style.width = `${theAudio.currentTime / theAudio.duration * 100}%`
+    });
+
+    theBar.addEventListener('mouseup', seekHandler);
+    function seekHandler(e) {
+      let clickedAt = e.clientX || e.pageX
+      const offsetLeft = e.currentTarget.getBoundingClientRect().left;
+      const seekRatio = (clickedAt - offsetLeft) / e.currentTarget.offsetWidth
+      // const wasPaused = theAudio.paused || theAudio.ended; // play on seek? Yes!
+      const playIn = setInterval(() => {
+        // not even metadata loaded => must be paused!
+        if (isNaN(theAudio.duration)) {
+          console.log('isNan, playing!');
+          theAudio.play()
+        } else {
+          // if (wasPaused) {
+          //   theAudio.pause()
+          // }
+          clearInterval(playIn)
+          const seekTime = seekRatio * theAudio.duration;
+          theAudio.currentTime = seekTime
+          console.log("🚀 ~ file: script.js ~ line 255 ~ seekHandler ~ seekTime", seekRatio, seekTime)
+        }
+      }, 200);
+
+      if (theAudio.paused) {
+        theAudio.play()
+      }
     }
-  })
-  // console.log("🚀 ~ file: script.js ~ line 206 ~ podcastPlayerHandler ~ podcastsWithSources", podcastsWithSources)
-  const audioContainer = []
+    // plus minus 10 & 30
+    plus10.addEventListener('click', (e) => {
+      theAudio.currentTime = theAudio.currentTime + 10
+    })
+    plus30.addEventListener('click', (e) => {
+      theAudio.currentTime = theAudio.currentTime + 30
+    })
+    minus10.addEventListener('click', (e) => {
+      theAudio.currentTime = theAudio.currentTime - 10
+    })
+    minus30.addEventListener('click', (e) => {
+      theAudio.currentTime = theAudio.currentTime - 30
+    })
 
-  podcastsWithSources.forEach(cast => {
-    const currentAudio = new Audio(cast.dataset.src)
-    console.log("🚀 ~ file: script.js ~ line 216 ~ podcastPlayerHandler ~ currentAudio", currentAudio)
-  })
+    // When audio plays, do XYZ!
+    theAudio.addEventListener('play', (event) => {
+      console.log('Video is playing');
+      element.classList.add('playing')
+    });
 
+    theAudio.addEventListener('playing', (event) => {
+      // console.log('Video is playing');
+      const audios = document.getElementsByTagName('audio');
+      for (let i = 0, len = audios.length; i < len; i++) {
+        if (audios[i] != event.target) {
+          audios[i].pause();
+        }
+      }
+    });
 
+    theAudio.addEventListener('pause', (event) => {
+      console.log('Video is  paused');
+      element.classList.remove('playing')
+    });
+
+    theAudio.addEventListener('progress', (event) => {
+      const progress = element.querySelector(progressSelector)
+      const buffered = progress.querySelector(`${progressSelector}--buffered`);
+      buffered.innerHTML = ''
+      const duration = theAudio.duration;
+      for (let i = 0; i < theAudio.buffered.length; i++) {
+        const start = theAudio.buffered.start(i) / duration * 100;
+        const end = theAudio.buffered.end(i) / duration * 100;
+        const loaded = document.createElement('span')
+        loaded.style.left = `${start}%`
+        loaded.style.right = `${100 - end}%`
+        if (start != 0) {
+          loaded.style.borderTopLeftRadius = 0
+          loaded.style.borderBottomLeftRadius = 0
+        }
+        if (end != 100) {
+          loaded.style.borderTopRightRadius = 0
+          loaded.style.borderBottomRightRadius = 0
+        }
+        buffered.appendChild(loaded)
+      }
+    });
+
+    theAudio.addEventListener('loadstart', (event) => {
+      console.log('Video is  loadstart');
+    });
+    theAudio.addEventListener('loadeddata', (event) => {
+      console.log('Video is  loadeddata');
+    });
+    theAudio.addEventListener('ended', (event) => {
+      console.log('Video is  ended');
+    });
+    theAudio.addEventListener('canplay', (event) => {
+      console.log('Video is  canplay');
+    });
+  }
 }
 
+function podcastPlayerHandlerObserver() {
+  // TODO: enable preload here (if)!
+  let options = {
+    root: document.querySelector('.recent'),
+    rootMargin: '0px',
+    threshold: 0.5
+  }
+  let observer = new IntersectionObserver(podcastPlayerHandler, options);
+  // target = document.querySelector(`.recent__card__podcast`)
+  target = document.querySelector(`.recent__card__podcast`)
+  observer.observe(target);
+}
 init()

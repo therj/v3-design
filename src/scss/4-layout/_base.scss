@@ -120,7 +120,6 @@ body {
         display: flex;
         flex-direction: column;
         background: clr.$grey-900;
-
       }
       &--section-title {
         text-align: center;
@@ -129,6 +128,23 @@ body {
       }
       // background: clr.$grey-800;
       &__list {
+        // HIDE temporary
+        position: relative;
+        &::after {
+          content: 'Coming Soon...';
+          opacity: 92%;
+          position: absolute;
+          top: 0;
+          bottom: -44px;
+          left: 0;
+          right: 0;
+          background: clr.$grey-800;
+          display: flex;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          font-size: 8rem;
+        }
         padding: var(--gap-between) var(--side-space);
         // flex: 1 1 100%;
         min-height: 300px;
@@ -138,8 +154,8 @@ body {
         // max-height: 500px;
         // overflow-y: scroll;
         // background: clr.$grey-1000;
-        $shadow1: rgba( clr.$grey-1000,0.4);
-        $shadow2: rgba( clr.$grey-1000,0.2);
+        // $shadow1: rgba(clr.$grey-1000, 0.4);
+        // $shadow2: rgba(clr.$grey-1000, 0.2);
         // box-shadow: inset 0px 8px 16px $shadow1 , inset 0px -8px 16px $shadow2 ;
         // box-shadow: inset 0px 2px 8px rgba(0,0,0,0.05),inset  0px -2px 8px rgba(0,0,0,0.05);
         display: flex;
@@ -150,40 +166,81 @@ body {
           flex-direction: column;
           display: flex;
           gap: 8px;
-          &__row1 {
+          &__heading {
             display: flex;
             justify-content: flex-start;
             gap: 8px;
           }
-          &__row2 {
+          &__datetime {
             display: flex;
             gap: 8px;
             justify-content: space-between;
             color: clr.$grey-600;
           }
-          &__row3 {
+          &__progress {
             display: flex;
-            // background-color: red;
-            &--progress {
-              background: clr.$grey-1000;
-              height: 4px;
-              width: 100%;
-              display: block;
-              position: relative;
-              border-radius: 200px;
-              &::after {
-                content: '';
-                left: 0;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                width: 20%;
+            position: relative;
+            border-radius: 2000px;
+            height: 8px;
+            cursor: pointer;
+            background: clr.$grey-1000;
+            &--buffered {
+              display: flex;
+              opacity: 80%;
+              & > span {
                 position: absolute;
+                top: 0;
+                bottom: 0;
+                background: clr.$grey-800;
                 border-radius: inherit;
-                // border-radius: 2000px;
-                // display: block;
-              background: clr.$grey-600;
               }
+              left: 0;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              position: absolute;
+              border-radius: inherit;
+            }
+            &--played {
+              opacity: 80%;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              width: 0;
+              position: absolute;
+              border-radius: inherit;
+              background: clr.$grey-600;
+            }
+          }
+          &.playing {
+            .recent__card__podcast__list--item__plusminus {
+              height: 40px;
+              transition: height 400ms ease;
+            }
+          }
+          &__plusminus {
+            transition: height 400ms ease;
+            // opacity: 0;
+            overflow: hidden;
+            height: 0;
+            display: flex;
+            gap: 16px;
+            & > span {
+              height: 40px;
+              width: 40px;
+              color: clr.$grey-200;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              img {
+                width: 100%;
+                height: 100%;
+                filter: contrast(17%);
+              }
+            }
+            span:nth-child(3) {
+              margin-left: auto;
             }
           }
         }
