@@ -220,7 +220,9 @@ function init() {
   goLight.addEventListener('click', function (e) {
     changeTheme(LIGHT_THEME_NAME);
     setThemeIcons(LIGHT_THEME_NAME);
-  }); // for scroll lock
+  }); // for podcasts
+
+  podcastPlayerHandlerObserver(); // for scroll lock
 
   setObserver();
   navToggleCheckbox.addEventListener('change', menuToggle); // fixed menu on reverse scroll
@@ -336,6 +338,161 @@ function setObserver() {
   }
 }
 
+function podcastPlayerHandler(params) {
+  var itemSelector = '.recent__card__podcast__list--item';
+  var toggleIconSelector = "".concat(itemSelector, "__heading--btn");
+  var progressSelector = "".concat(itemSelector, "__progress");
+  var plusMinusSelector = "".concat(itemSelector, "__plusminus");
+  var podcasts = document.querySelectorAll(itemSelector);
+
+  var _loop = function _loop(i) {
+    var element = podcasts[i];
+    var theButton = element.querySelector(toggleIconSelector);
+    var theAudio = element.querySelector('audio');
+    var theBar = element.querySelector(progressSelector);
+    var plusMinus = element.querySelector(plusMinusSelector);
+    var plus10 = plusMinus.querySelector('.plus10');
+    var plus30 = plusMinus.querySelector('.plus30');
+    var minus10 = plusMinus.querySelector('.minus10');
+    var minus30 = plusMinus.querySelector('.minus30');
+    if (!theAudio) return "continue"; // Play pause button
+
+    theButton.addEventListener('click', function (e) {
+      if (theAudio.paused) {
+        theAudio.play();
+        console.log('Playing!');
+      } else {
+        theAudio.pause();
+        console.log('Paused!');
+      }
+    }); //
+    // change progress bar
+
+    theAudio.addEventListener('timeupdate', function (event) {
+      var progress = element.querySelector(progressSelector);
+      var played = progress.querySelector("".concat(progressSelector, "--played"));
+      played.style.width = "".concat(theAudio.currentTime / theAudio.duration * 100, "%");
+    });
+    theBar.addEventListener('mouseup', seekHandler);
+
+    function seekHandler(e) {
+      var clickedAt = e.clientX || e.pageX;
+      var offsetLeft = e.currentTarget.getBoundingClientRect().left;
+      var seekRatio = (clickedAt - offsetLeft) / e.currentTarget.offsetWidth; // const wasPaused = theAudio.paused || theAudio.ended; // play on seek? Yes!
+
+      var playIn = setInterval(function () {
+        // not even metadata loaded => must be paused!
+        if (isNaN(theAudio.duration)) {
+          console.log('isNan, playing!');
+          theAudio.play();
+        } else {
+          // if (wasPaused) {
+          //   theAudio.pause()
+          // }
+          clearInterval(playIn);
+          var seekTime = seekRatio * theAudio.duration;
+          theAudio.currentTime = seekTime;
+          console.log("🚀 ~ file: script.js ~ line 255 ~ seekHandler ~ seekTime", seekRatio, seekTime);
+        }
+      }, 200);
+
+      if (theAudio.paused) {
+        theAudio.play();
+      }
+    } // plus minus 10 & 30
+
+
+    plus10.addEventListener('click', function (e) {
+      theAudio.currentTime = theAudio.currentTime + 10;
+    });
+    plus30.addEventListener('click', function (e) {
+      theAudio.currentTime = theAudio.currentTime + 30;
+    });
+    minus10.addEventListener('click', function (e) {
+      theAudio.currentTime = theAudio.currentTime - 10;
+    });
+    minus30.addEventListener('click', function (e) {
+      theAudio.currentTime = theAudio.currentTime - 30;
+    }); // When audio plays, do XYZ!
+
+    theAudio.addEventListener('play', function (event) {
+      console.log('Video is playing');
+      element.classList.add('playing');
+    });
+    theAudio.addEventListener('playing', function (event) {
+      // console.log('Video is playing');
+      var audios = document.getElementsByTagName('audio');
+
+      for (var _i = 0, len = audios.length; _i < len; _i++) {
+        if (audios[_i] != event.target) {
+          audios[_i].pause();
+        }
+      }
+    });
+    theAudio.addEventListener('pause', function (event) {
+      console.log('Video is  paused');
+      element.classList.remove('playing');
+    });
+    theAudio.addEventListener('progress', function (event) {
+      var progress = element.querySelector(progressSelector);
+      var buffered = progress.querySelector("".concat(progressSelector, "--buffered"));
+      buffered.innerHTML = '';
+      var duration = theAudio.duration;
+
+      for (var _i2 = 0; _i2 < theAudio.buffered.length; _i2++) {
+        var start = theAudio.buffered.start(_i2) / duration * 100;
+        var end = theAudio.buffered.end(_i2) / duration * 100;
+        var loaded = document.createElement('span');
+        loaded.style.left = "".concat(start, "%");
+        loaded.style.right = "".concat(100 - end, "%");
+
+        if (start != 0) {
+          loaded.style.borderTopLeftRadius = 0;
+          loaded.style.borderBottomLeftRadius = 0;
+        }
+
+        if (end != 100) {
+          loaded.style.borderTopRightRadius = 0;
+          loaded.style.borderBottomRightRadius = 0;
+        }
+
+        buffered.appendChild(loaded);
+      }
+    });
+    theAudio.addEventListener('loadstart', function (event) {
+      console.log('Video is  loadstart');
+    });
+    theAudio.addEventListener('loadeddata', function (event) {
+      console.log('Video is  loadeddata');
+    });
+    theAudio.addEventListener('ended', function (event) {
+      console.log('Video is  ended');
+    });
+    theAudio.addEventListener('canplay', function (event) {
+      console.log('Video is  canplay');
+    });
+  };
+
+  for (var i = 0; i < podcasts.length; i++) {
+    var _ret = _loop(i);
+
+    if (_ret === "continue") continue;
+  }
+}
+
+function podcastPlayerHandlerObserver() {
+  // TODO: enable preload here (if)!
+  var options = {
+    root: document.querySelector('.recent'),
+    rootMargin: '0px',
+    threshold: 0.5
+  };
+  var observer = new IntersectionObserver(podcastPlayerHandler, options); // target = document.querySelector(`.recent__card__podcast`)
+
+  target = document.querySelector(".recent__card__podcast");
+  observer.observe(target);
+}
+
 init();
 },{}]},{},["L4bL"], null)
-//# sourceMappingURL=script.e6a49305.js.map
+//# sourceMappingURL=script.c606028a.js.map

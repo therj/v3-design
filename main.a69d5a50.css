@@ -698,6 +698,7 @@ body h2 {
   background-size: 0;
 }
 .nav__poly:after {
+  pointer-events: none;
   content: "";
   position: absolute;
   height: 64px;
@@ -787,4 +788,190 @@ body {
   margin: auto;
 }
 
-/*# sourceMappingURL=main.674355f6.css.map */
+.recent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.recent__section-title {
+  flex-basis: 100%;
+}
+.recent__card {
+  flex: 1 1 350px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  outline: 2px solid red;
+  flex-wrap: wrap;
+}
+.recent__card__external {
+  overflow: hidden;
+  position: relative;
+}
+.recent__card__external__link--image, .recent__card__blog__link--image {
+  width: 100%;
+  height: 200px;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.recent__card__external__content, .recent__card__blog__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+.recent__card__external__content__link, .recent__card__blog__content__link {
+  background: rgba(0, 255, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+  padding: var(--gap-between) var(--side-space);
+  flex: 1 1 auto;
+}
+.recent__card__external__content--footer, .recent__card__blog__content--footer {
+  background: rgba(255, 0, 0, 0.1);
+  padding: var(--gap-between) var(--side-space);
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.recent__card__external__content--footer a, .recent__card__blog__content--footer a {
+  text-decoration: none;
+  color: inherit;
+  padding: 8px 8px;
+  text-align: center;
+  background: rgba(0, 255, 0, 0.1);
+}
+.recent__card__external--ribbon, .recent__card__blog--ribbon {
+  position: absolute;
+  top: 32px;
+  left: 64px;
+  transform: translateX(-50%) rotate(-40deg);
+  padding: 16px 64px;
+  line-height: 0;
+  text-decoration: none;
+  background: #33404d;
+  color: #e5e8eb;
+}
+.recent__card__podcast--container {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  background: #e5e8eb;
+}
+.recent__card__podcast--section-title {
+  text-align: center;
+}
+.recent__card__podcast__list {
+  position: relative;
+  padding: var(--gap-between) var(--side-space);
+  min-height: 300px;
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.recent__card__podcast__list::after {
+  content: "Coming Soon...";
+  opacity: 92%;
+  position: absolute;
+  top: 0;
+  bottom: -44px;
+  left: 0;
+  right: 0;
+  background: #cad1d8;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 8rem;
+}
+.recent__card__podcast__list--item {
+  flex-direction: column;
+  display: flex;
+  gap: 8px;
+}
+.recent__card__podcast__list--item__heading {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.recent__card__podcast__list--item__datetime {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  color: #7b8793;
+}
+.recent__card__podcast__list--item__progress {
+  display: flex;
+  position: relative;
+  border-radius: 2000px;
+  height: 8px;
+  cursor: pointer;
+  background: #f5f7fa;
+}
+.recent__card__podcast__list--item__progress--buffered {
+  display: flex;
+  opacity: 80%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  border-radius: inherit;
+}
+.recent__card__podcast__list--item__progress--buffered > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #cad1d8;
+  border-radius: inherit;
+}
+.recent__card__podcast__list--item__progress--played {
+  opacity: 80%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  position: absolute;
+  border-radius: inherit;
+  background: #7b8793;
+}
+.recent__card__podcast__list--item.playing .recent__card__podcast__list--item__plusminus {
+  height: 40px;
+  transition: height 400ms ease;
+}
+.recent__card__podcast__list--item__plusminus {
+  transition: height 400ms ease;
+  overflow: hidden;
+  height: 0;
+  display: flex;
+  gap: 16px;
+}
+.recent__card__podcast__list--item__plusminus > span {
+  height: 40px;
+  width: 40px;
+  color: #33404d;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.recent__card__podcast__list--item__plusminus > span img {
+  width: 100%;
+  height: 100%;
+  filter: contrast(17%);
+}
+.recent__card__podcast__list--item__plusminus span:nth-child(3) {
+  margin-left: auto;
+}
+.recent__card__podcast__list--more {
+  background: rgba(0, 255, 255, 0.5);
+  padding: 10px 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+/*# sourceMappingURL=main.a69d5a50.css.map */
