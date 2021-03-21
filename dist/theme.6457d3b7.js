@@ -118,8 +118,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"qwQt":[function(require,module,exports) {
-var rootEl = document.querySelector(':root');
-var defaultTheme = rootEl.getAttribute('data-theme');
+var rootEl = document.querySelector(':root'); // const defaultTheme = rootEl.getAttribute('data-theme');
+
+var defaultTheme = rootEl.dataset.theme;
 var DARK_THEME_NAME = 'dark';
 var LIGHT_THEME_NAME = 'light';
 var DEFAULT_THEME_NAME = defaultTheme;
@@ -162,13 +163,19 @@ function storeThemePreference(mode) {
   if (isValid) localStorage.setItem('theme', mode);
 }
 
+function startListeningToOSTheme() {
+  var matchMediaPrefDark = window.matchMedia('(prefers-color-scheme: dark)');
+  matchMediaPrefDark.addEventListener('change', setTheme(getTheme()));
+}
+
 function init() {
   window.DARK_THEME_NAME = DARK_THEME_NAME;
   window.LIGHT_THEME_NAME = LIGHT_THEME_NAME;
   window.DEFAULT_THEME_NAME = DEFAULT_THEME_NAME;
   window.setTheme = setTheme;
   window.storeThemePreference = storeThemePreference;
-  setTheme(getTheme()); // TIP: avoid local storage events, if possible.
+  setTheme(getTheme());
+  startListeningToOSTheme(); // TIP: avoid local storage events, if possible.
 
   window.addEventListener('storage', function () {
     // nobody needs this, but dev for devs!
@@ -183,4 +190,4 @@ function init() {
 
 init();
 },{}]},{},["qwQt"], null)
-//# sourceMappingURL=theme.50d83733.js.map
+//# sourceMappingURL=theme.6457d3b7.js.map
