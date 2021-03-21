@@ -801,7 +801,6 @@ body {
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  outline: 2px solid red;
   flex-wrap: wrap;
 }
 .recent__card__external {
@@ -893,6 +892,7 @@ body {
   gap: 32px;
 }
 .recent__card__podcast__list::after {
+  content: "Coming Soon...";
   opacity: 92%;
   position: absolute;
   top: 0;
@@ -1022,4 +1022,4 @@ body {
   color: #1f2933;
 }
 
-/*# sourceMappingURL=main.c7f241c9.css.map */
+/*# sourceMappingURL=main.f3f69bcd.css.map */
