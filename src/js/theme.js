@@ -1,6 +1,7 @@
 
 const rootEl = document.querySelector(':root');
-const defaultTheme = rootEl.getAttribute('data-theme');
+// const defaultTheme = rootEl.getAttribute('data-theme');
+const defaultTheme = rootEl.dataset.theme;
 
 const DARK_THEME_NAME = 'dark';
 const LIGHT_THEME_NAME = 'light';
@@ -46,7 +47,10 @@ function storeThemePreference(mode) {
   }
   if (isValid) localStorage.setItem('theme', mode);
 }
-
+function startListeningToOSTheme() {
+  const matchMediaPrefDark = window.matchMedia('(prefers-color-scheme: dark)');
+  matchMediaPrefDark.addEventListener('change', setTheme(getTheme()));
+}
 
 function init() {
   window.DARK_THEME_NAME = DARK_THEME_NAME;
@@ -57,8 +61,8 @@ function init() {
 
   setTheme(getTheme());
 
+  startListeningToOSTheme()
   // TIP: avoid local storage events, if possible.
-
   window.addEventListener('storage', () => {
     // nobody needs this, but dev for devs!
     const themeLocal = window.localStorage.getItem('theme');
