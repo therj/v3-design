@@ -18,6 +18,12 @@ body {
       animation: title-animation 32s linear infinite;
       font-weight: 600;
       font-size: 5rem;
+      // TODO: for browers lacking text clip support
+      // @supports not (-webkit-background-clip:text){
+      //   background: transparent;
+      //   color: var(--text-color);
+      //   // color: clr.$purple-400;
+      // }
     }
   }
   @keyframes title-animation {

@@ -49,7 +49,7 @@ body {
   $nav-height: g.$nav-height;
   $poly-height: g.$poly-height;
   // TODO: set multiplier 1x!
-  $multiplier: 10;
+  $multiplier: 2;
   $ham-rotate-duration: 200ms * $multiplier;
   $ham-hide-delay: $ham-rotate-duration * 0.2;
   $ham-show-delay: $ham-rotate-duration * 0.8;
@@ -121,7 +121,7 @@ body {
       &--small {
         width: 45%;
         transform-origin: 0% 0%;
-        transition: transform $ham-rotate-duration ease-in;
+        transition: transform $ham-rotate-duration ease-out;
       }
       &--large {
         width: 90%;
