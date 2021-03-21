@@ -895,7 +895,7 @@ body {
   content: "Coming Soon...";
   opacity: 92%;
   position: absolute;
-  top: 0;
+  top: -4px;
   bottom: -44px;
   left: 0;
   right: 0;
@@ -1022,4 +1022,4 @@ body {
   color: #1f2933;
 }
 
-/*# sourceMappingURL=main.f3f69bcd.css.map */
+/*# sourceMappingURL=main.cfee1818.css.map */
