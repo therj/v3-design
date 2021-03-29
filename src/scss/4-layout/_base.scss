@@ -605,8 +605,8 @@ body {
   }
   &__card {
     $radiusTop: 4px;
-    background: rgba(clr.$grey-900,0.4);
-    // background: rgba(clr.$grey-200,0.5);
+    background: rgba(clr.$grey-800,0.6);
+    // background: rgba(clr.$grey-200,0.5); //dark mode
     $radiusBottom: $radiusTop;
     // $radiusBottom: 0;
     $radius: $radiusTop $radiusTop $radiusBottom $radiusBottom;
