@@ -87,6 +87,8 @@ function init() {
     changeTheme(LIGHT_THEME_NAME)
     setThemeIcons(LIGHT_THEME_NAME)
   })
+  // for scrolling experience tabs
+  experienceRadioChangeListener()
 
   // for podcasts
   podcastPlayerHandlerObserver();
@@ -348,4 +350,50 @@ function podcastPlayerHandlerObserver() {
   target = document.querySelector(`.recent__card__podcast`)
   observer.observe(target);
 }
+
+function abs(num) {
+  const sign = num > 0 ? 1 : -1;
+  return num * sign;
+}
+function scrollTo(el) {
+  el = el.closest('.experience__tablist--tab')
+  // const elLeft = el.offsetLeft + el.offsetWidth;
+  const elLeft = el.offsetLeft;
+  const parent = el.closest('.experience__tablist')
+
+  const scrollPos = elLeft - 70;
+
+  parent.scroll({
+    left: scrollPos,
+    behaviour: 'smooth'
+  })
+
+
+}
+function experienceRadioChangeListener() {
+
+  const experienceTabs = document.querySelectorAll('input[type=radio][name="experience"]')
+  experienceTabs.forEach(tab => {
+    tab.addEventListener('change', (e) => {
+      e.preventDefault()
+      scrollTo(e.target)
+      const contentContainer = e.target.closest('.experience__tablist').closest('.experience').querySelector(`.experience__content`);
+      const content = contentContainer.querySelector(`#${e.target.id}-content`)
+      content.classList.add('active')
+
+      if (contentContainer.hasChildNodes()) {
+        let children = contentContainer.childNodes;
+        for (let i = 0; i < children.length; i++) {
+          // children[i].id
+          const id = children[i].id
+          if (id && id.startsWith('experience-') && id.endsWith('-content') && children[i] !== content) {
+            children[i].classList.remove('active')
+          }
+        }
+      }
+    })
+  })
+
+}
+
 init()

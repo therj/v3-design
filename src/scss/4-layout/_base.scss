@@ -149,6 +149,7 @@ body {
             }
           }
           &--visit {
+            padding: 10px 20px;
             color: clr.$grey-500;
             transition: all 400ms ease;
             &:hover {
@@ -339,43 +340,237 @@ body {
 }
 
 .experience {
-  input {
-    display: none;
-  } /* hide radio buttons */
-  input + label {
-    display: inline-block;
-  } /* show labels in line */
-  input ~ .tab {
-    display: none;
-  } /* hide contents */
-  /* show contents only for selected tab */
-  #tab1:checked ~ .tab.content1,
-  #tab2:checked ~ .tab.content2,
-  #tab3:checked ~ .tab.content3,
-  #tab4:checked ~ .tab.content4,
-  #tab5:checked ~ .tab.content5 {
-    display: block;
+  &__section-title{
+    margin-bottom: 48px;
+  }
+  &__arrowlist {
+    @media screen and (min-width: 672px) {
+      display: none;
+    }
+    display: flex;
+    // justify-content: flex-end;
+    // bottom: 10px;
+    &--left,
+    &--right {
+    }
+    small {
+      margin-top: 6px;
+    }
+  }
+  &__tablist {
+    margin: 0 -20px;
+    padding: 0;
+    // max-width: min-content;
+    list-style-type: none;
+    // background: rgba(clr.$grey-100, 0.5);
+    // white-space: nowrap;
+    overflow-x: auto;
+    display: flex;
+    // width: auto;
+    gap: 4px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-items: stretch;
+    // align-items: stretch;
+
+    // position: relative;
+    // top: 60px;
+    @mixin scrollbar {
+
+      height: 8px;
+      background-color: lightcoral;
+    }
+    @mixin scrollbarTrack {
+      background: clr.$grey-800;
+    }
+    @mixin scrollbarThumb {
+      background: linear-gradient(to right, red 30%, green 70%);
+      background: clr.$grad-400;
+      border-radius: 1500px;
+    }
+    @mixin scrollbarThumbHover {
+      background: linear-gradient(to right, red, green);
+      background: clr.$grad-500;
+    }
+
+    // firefox
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: clr.$purple-500 lightcoral; /* scroll thumb and track */
+
+    &::-webkit-scrollbar {
+      // the scrollbar
+      @include scrollbar;
+    }
+    &::-webkit-scrollbar-track {
+      // the track (progress bar) of the scrollbar.
+      @include scrollbarTrack;
+      // background: linear-gradient(90deg,#434343,#434343 1px,#111 0,#111)
+    }
+
+    &::-webkit-scrollbar-thumb {
+      // the draggable scrolling handle.
+      @include scrollbarThumb;
+      // border: 3px solid transparent;
+      // width: 3px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      @include scrollbarThumbHover;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      // background: blue;
+      // the track (progress bar) NOT covered by the handle.
+    }
+    &::-webkit-scrollbar-button {
+      // the buttons on the scrollbar (arrows pointing upwards and downwards).
+      // background: transparent;
+    }
+    &::-webkit-scrollbar-corner {
+      // the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet.
+    }
+    &::-webkit-resizer {
+      // the draggable resizing handle that appears at the bottom corner of some elements.
+    }
+
+    &--tab {
+      display: flex;
+      white-space: nowrap;
+      flex: 1 1 100%;
+      input {
+        display: none;
+      }
+      input + label {
+        flex-basis: 100%;
+        padding: 15px 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: clr.$grey-900;
+        // transition: all 500ms ease;
+        &:hover {
+          background: clr.$grad-100;
+        }
+      }
+      input:checked + label {
+        background: clr.$grad-500;
+        color: var(--bg-color);
+        // transition: all 400ms ease-out;
+      }
+    }
+  }
+  &__content {
+    // do this instead of negative margin for full-width-like appearance
+    // background: lightyellow;
+    // box-shadow: -20px 0 0 0 lightyellow, 20px 0 0 0 lightyellow;
+
+    // margin: 0px -20px;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    &--item {
+      flex-basis: 100%;
+      padding: 40px 0px 40px 20px ;
+      display: none;
+      &.active {
+        display: flex;
+        flex-flow: column wrap;
+        gap: 32px;
+      }
+      &__title {
+        font-size: 3rem;
+        .title {
+        }
+        .organization {
+          font-weight: bold;
+        }
+      }
+      &__subtitle {
+        //
+      }
+      &__duration {
+        .since {
+        }
+        .until {
+        }
+        .since-until {
+        }
+      }
+      &__achievement {
+        margin: 0 0 0 16px;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        list-style-position: outside;
+        &--point {
+          padding-left: 16px;
+
+          &::marker{
+            // content: "\1F44D";
+            content: "➤";
+            content: "▶";
+            color: clr.$blue-500;
+          }
+        }
+      }
+      &__tech {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 20px;
+        justify-content: flex-end;
+        & > * {
+        }
+      }
+      &__links {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 40px;
+        justify-content: flex-end;
+
+        & > * {
+          img {
+            height: 24px;
+            width: 24px;
+          }
+        }
+      }
+    }
   }
 
-  input + label {
-    /* box with rounded corner */
-    cursor: pointer;
-    border: 1px solid #999;
-    background: #eee;
-    padding: 4px 12px;
-    border-radius: 4px 4px 0 0;
-    position: relative;
-    top: 1px;
-  }
-  input:checked + label {
-    /* white background for selected tab */
-    background: #fff;
-    border-bottom: 1px solid transparent;
-  }
-  input ~ .tab {
-    /* grey line between tab and contents */
-    border-top: 1px solid #999;
-    padding: 12px;
+  @media screen and (min-width: 800px) {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: row wrap;
+    &__section-title {
+      flex-basis: 100%;
+    }
+    &__tablist {
+      margin: 0;
+      flex-flow: column wrap;
+      flex: 0.5 2 40%;
+      justify-content: flex-start;
+      border-left: 8px solid grey;
+      border-image: linear-gradient(to bottom, clr.$purple-200, clr.$blue-200) 1;
+      overflow: visible;
+      &--tab {
+        flex: 1 1 auto;
+        input + label {
+          padding-left: 40px;
+          white-space: normal;
+        }
+        input:checked + label {
+          box-shadow: -8px 0 0 0px clr.$blue-400;
+        }
+      }
+    }
+    &__content {
+      flex: 2 0.5 60%;
+      margin: 0;
+      align-self: stretch;
+      &--item {
+        padding: 0px 40px 40px 40px
+      }
+    }
   }
 }
 
@@ -389,6 +584,8 @@ body {
   }
   &__card {
     $radiusTop: 4px;
+    background: rgba(clr.$grey-900,0.8);
+    // background: rgba(clr.$grey-200,0.5);
     $radiusBottom: $radiusTop;
     // $radiusBottom: 0;
     $radius: $radiusTop $radiusTop $radiusBottom $radiusBottom;
@@ -527,8 +724,6 @@ body {
         }
       }
 
-
-
       // box-shadow: 0px 0px 38px rgba(39, 44, 49, 0.12),
       //   0px 0px 8px rgba(39, 44, 49, 0.06);
 
@@ -617,6 +812,7 @@ body {
         &__links {
           a > img {
             height: 24px;
+            width: 24px;
             display: block;
           }
         }
