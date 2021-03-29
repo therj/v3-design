@@ -89,6 +89,8 @@ function init() {
   })
   // for scrolling experience tabs
   experienceRadioChangeListener()
+  // for scrolling foss tabs
+  fossRadioChangeListener()
 
   // for podcasts
   podcastPlayerHandlerObserver();
@@ -355,11 +357,11 @@ function abs(num) {
   const sign = num > 0 ? 1 : -1;
   return num * sign;
 }
-function scrollTo(el) {
-  el = el.closest('.experience__tablist--tab')
+function scrollTo(el, who) {
+  el = el.closest(`.${who}__tablist--tab`)
   // const elLeft = el.offsetLeft + el.offsetWidth;
   const elLeft = el.offsetLeft;
-  const parent = el.closest('.experience__tablist')
+  const parent = el.closest(`.${who}__tablist`)
 
   const scrollPos = elLeft - 70;
 
@@ -376,7 +378,7 @@ function experienceRadioChangeListener() {
   experienceTabs.forEach(tab => {
     tab.addEventListener('change', (e) => {
       e.preventDefault()
-      scrollTo(e.target)
+      scrollTo(e.target, 'experience')
       const contentContainer = e.target.closest('.experience__tablist').closest('.experience').querySelector(`.experience__content`);
       const content = contentContainer.querySelector(`#${e.target.id}-content`)
       content.classList.add('active')
@@ -394,6 +396,30 @@ function experienceRadioChangeListener() {
     })
   })
 
+}
+function fossRadioChangeListener() {
+
+  const fossTabs = document.querySelectorAll('input[type=radio][name="foss"]')
+  fossTabs.forEach(tab => {
+    tab.addEventListener('change', (e) => {
+      e.preventDefault()
+      scrollTo(e.target, 'foss')
+      const contentContainer = e.target.closest('.foss__tablist').closest('.foss').querySelector(`.foss__content`);
+      const content = contentContainer.querySelector(`#${e.target.id}-content`)
+      content.classList.add('active')
+
+      if (contentContainer.hasChildNodes()) {
+        let children = contentContainer.childNodes;
+        for (let i = 0; i < children.length; i++) {
+          // children[i].id
+          const id = children[i].id
+          if (id && id.startsWith('foss-') && id.endsWith('-content') && children[i] !== content) {
+            children[i].classList.remove('active')
+          }
+        }
+      }
+    })
+  })
 }
 
 init()
