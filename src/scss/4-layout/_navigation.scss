@@ -323,3 +323,128 @@ body {
   // position: relative;
   // padding-top: 64px;
 }
+
+.footer {
+  min-height: 500px;
+  padding: 64px var(--side-space);
+  padding-bottom: 128px;
+  color: var(--bg-color);
+  // a {
+  //   color: var(--bg-color);
+  // }
+  display: flex;
+  gap: 80px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  &__work {
+    // color: var(--bg-color);
+
+    flex: 1 1 400px;
+    justify-items: flex-start;
+    &__title {
+      text-align: left;
+    }
+    &__description {
+    }
+    &__start {
+      display: inline-flex;
+      &--link {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--text-color);
+        color: var(--bg-color);
+        padding: 1em 1.5em;
+        text-decoration: none;
+        background: clr.$grey-900;
+        border-radius: 2em;
+        background: clr.$grad-900;
+      }
+    }
+  }
+  &__social {
+    flex: 1 1 400px;
+    display: flex;
+    flex-flow: column wrap;
+    &__title {
+      // flex-basis: 100%;
+      // text-align: left;
+    }
+    &__link {
+      display: flex;
+      flex-flow: column wrap;
+      gap: 20px;
+      &--item {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        text-decoration: none;
+        color: var(--bg-color);
+
+        img {
+          display: block;
+          width: 32px;
+          height: 32px;
+        }
+        span {
+        }
+      }
+    }
+  }
+  &__companies {
+    flex-basis: 100%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    &__info {
+      flex: 0.5 4 300px;
+    }
+    &__logos {
+      flex: 2 0.25 300px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      a img {
+        display: block;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    &__credit {
+      flex-basis: 100%;
+    }
+  }
+}
+.credit {
+  background: clr.$grey-800;
+  padding: 20px 10px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  &__logo {
+    img {
+      display: block;
+      height: 48px;
+      width: 48px;
+    }
+  }
+  &__text {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 2px;
+  }
+  &__privacy {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    color: clr.$grey-200;
+    text-decoration: none;
+    &:hover {
+      color: clr.$blue-500;
+    }
+  }
+}

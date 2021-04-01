@@ -63,7 +63,7 @@ body {
       margin-top: -#{g.$poly-height};
     }
     &:last-of-type {
-      padding-bottom: g.$poly-height;
+      padding-bottom: g.$poly-height*4;
     }
 
     h1,

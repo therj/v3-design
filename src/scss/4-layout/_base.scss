@@ -3,6 +3,29 @@ body {
   max-width: 1300px;
   margin: auto;
 }
+[target='_blank']::after {
+  // color: red ;
+  content: '';
+  display: inline-block;
+  margin-left: 0.1em;
+  height: 0.7em;
+  width: 1em;
+  background: url('/images/assets/external.svg');
+  background-position: 50% 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+[data-bg='dark'][target='_blank']::after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.1em;
+  height: 0.7em;
+  width: 1em;
+  background: url('/images/assets/external-light.svg');
+  background-position: 50% 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .recent {
   display: flex;
   flex-wrap: wrap;
@@ -13,6 +36,13 @@ body {
   }
 
   &__card {
+    background: rgba(clr.$grey-800, 0.4);
+    background: rgba(clr.$grey-900, 0.5);
+
+    &:hover {
+      background: clr.$grad-100;
+      // background: rgba(clr.$grey-900,0.8);
+    }
     $radiusTop: 4px;
     $radiusBottom: $radiusTop;
     // $radiusBottom: 0;
@@ -53,7 +83,7 @@ body {
     }
 
     &:hover {
-      transform: translate3D(0, -1px, 0) scale(1.02);
+      transform: translate3D(0, -4px, 0) scale(1);
       transition: transform 400ms ease;
       &::before,
       &::after {
@@ -64,7 +94,7 @@ body {
       }
       &::after {
         transition: opacity 400ms ease;
-        opacity: 1;
+        // opacity: 1;
       }
     }
 
@@ -150,11 +180,11 @@ body {
           }
           &--visit {
             padding: 10px 20px;
-            color: clr.$grey-500;
+            color: clr.$grey-300;
             transition: all 400ms ease;
             &:hover {
               transition: all 400ms ease;
-              color: clr.$grey-300;
+              color: clr.$grey-200;
             }
           }
         }
@@ -169,13 +199,17 @@ body {
       }
       &--section-title {
         text-align: center;
+        // box-shadow: 0px 0px 20px 0px grey;
+        // margin: 0;
+        // padding: var(--gap-between) 0;
+        // clip-path: inset(0px 1px -20px 0px);
       }
       // background: clr.$grey-800;
       &__list {
         // HIDE temporary
         position: relative;
         &::after {
-          content: 'Coming Soon...';
+          // content: 'Coming Soon...';
           opacity: 92%;
           position: absolute;
           top: -4px;
@@ -193,6 +227,8 @@ body {
         padding: var(--gap-between) var(--side-space);
         // flex: 1 1 100%;
         min-height: 300px;
+        // max-height: 500px;
+        // overflow-y: auto;
         flex: 1 1 100%;
         display: flex;
         flex-direction: column;
@@ -204,6 +240,9 @@ body {
         // box-shadow: inset 0px 8px 16px $shadow1 , inset 0px -8px 16px $shadow2 ;
         // box-shadow: inset 0 0px 4px 0px rgba(clr.$grey-700, 0.2);
         border-top: 4px solid rgba(clr.$grey-800, 0.4);
+        border-image: linear-gradient(to right, clr.$purple-500, clr.$blue-500)
+          1;
+
         // border-bottom: 4px solid rgba(clr.$grey-700, 0.44);
 
         display: flex;
@@ -250,6 +289,7 @@ body {
             height: 4px;
             cursor: pointer;
             background: clr.$grey-1000;
+            // background: clr.$grad-500;
             &--buffered {
               display: flex;
               opacity: 80%;
@@ -258,6 +298,7 @@ body {
                 top: 0;
                 bottom: 0;
                 background: clr.$grey-800;
+                // background: clr.$grad-300;
                 border-radius: inherit;
               }
               left: 0;
@@ -276,6 +317,7 @@ body {
               position: absolute;
               border-radius: inherit;
               background: clr.$grey-600;
+              // background: clr.$grad-100;
             }
           }
           &.playing {
@@ -320,6 +362,9 @@ body {
           }
         }
         &--more {
+          // margin: 0 var(--side-space) var(--gap-between) var(--side-space);
+          // margin-top: auto;
+          // margin-bottom: var(--gap-between);
           a {
             display: block;
             text-decoration: none;
@@ -327,10 +372,54 @@ body {
             width: 100%;
             height: 100%;
             padding: 10px 20px;
-            background: rgba(clr.$grey-700, 0.4);
-            color: clr.$grey-300;
+            // background: rgba(clr.$grey-700, 0.4);
+            // background: var(--nav-bg);
+            // color: clr.$grey-300;
+            // color: clr.$blue-100;
+            // background-size: 200% 100%;
+            // background-position: 100% 0%;
+            // transition: all 500ms ease-out;
+
+            // background: var(--title-color-grad);
+            // -webkit-background-clip: text;
+            // background-clip: text;
+            color: clr.$purple-500;
+            // background-size: 300%;
+            // animation: title-animation 32s linear infinite;
             &:hover {
-              color: clr.$grey-100;
+              // transition: all 400ms ease-out;
+              // color: clr.$grey-100;
+            }
+          }
+        }
+      }
+    }
+    &__podcast {
+      &__list {
+        padding: 0;
+        gap: 0;
+        &--item {
+          padding: var(--gap-between) var(--side-space);
+          position: relative;
+          &::after {
+            content: '';
+            background: clr.$grad-300;
+            // background: red;
+            // opacity: 0;
+            z-index: -1;
+            opacity: 0;
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            transition: all 400ms ease;
+          }
+          &:hover {
+            &::after {
+              transition: all 200ms ease;
+              opacity: 0.4;
             }
           }
         }
@@ -593,7 +682,6 @@ body {
         &__tech,
         &__links {
           justify-content: flex-end;
-          // flex-wrap: wrap-reverse;
         }
       }
     }
@@ -611,6 +699,11 @@ body {
   &__card {
     $radiusTop: 4px;
     background: rgba(clr.$grey-800, 0.4);
+    background: rgba(clr.$grey-900, 0.5);
+    &:hover {
+      background: clr.$grad-100;
+      background: rgba(clr.$purple-100, 1);
+    }
     // background: rgba(clr.$grey-200,0.5); //dark mode
     $radiusBottom: $radiusTop;
     // $radiusBottom: 0;
@@ -654,7 +747,7 @@ body {
     }
 
     &:hover {
-      transform: translate3D(0, -1px, 0) scale(1.02);
+      transform: translate3D(0, -4px, 0) scale(1);
       transition: transform 400ms ease;
       &::before,
       &::after {
@@ -665,7 +758,7 @@ body {
       }
       &::after {
         transition: opacity 400ms ease;
-        opacity: 1;
+        // opacity: 1;
       }
     }
     p {
@@ -738,7 +831,7 @@ body {
       }
       &:hover {
         // transform: translate3D(0, -1px, 0) scale(1.02);
-        transform: translate3D(0, 0px, 0) scale(1.02);
+        transform: translate3D(0, 0px, 0) scale(1);
         transition: transform 400ms ease;
         &::before,
         &::after {
@@ -927,6 +1020,11 @@ body {
       //
       //
       background: rgba(clr.$grey-800, 0.4);
+      background: rgba(clr.$grey-900, 0.5);
+      &:hover {
+        background: clr.$grad-100;
+        background: rgba(clr.$purple-100, 1);
+      }
       $radiusTop: 4px;
       $radiusBottom: $radiusTop;
       // $radiusBottom: 0;
@@ -971,18 +1069,18 @@ body {
       }
 
       &:hover {
-        transform: translate3D(0, -1px, 0) scale(1.02);
+        transform: translate3D(0, -4px, 0) scale(1);
         transition: transform 400ms ease;
         &::before,
         &::after {
           transition: opacity 400ms ease;
         }
         &::before {
-          // opacity: 0;
+          opacity: 0;
         }
         &::after {
           transition: opacity 400ms ease;
-          opacity: 1;
+          // opacity: 1;
         }
       }
 
@@ -1004,16 +1102,16 @@ body {
             height: 64px;
             width: 64px;
             display: block;
-            filter:  opacity(600%) contrast(0.5%);
+            filter: opacity(600%) contrast(0.5%);
           }
         }
         .right {
           display: flex;
           @include mindTheGap;
           justify-content: flex-end;
-          a:hover img{
+          a:hover img {
             filter: contrast(100%);
-            transition: all 400ms ease ;
+            transition: all 400ms ease;
           }
           img {
             height: 40px;
@@ -1021,7 +1119,7 @@ body {
             display: block;
             // opacity: 0.6;
             filter: contrast(40%);
-            transition: all 500ms ease ;
+            transition: all 500ms ease;
           }
         }
       }

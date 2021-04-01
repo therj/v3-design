@@ -37,14 +37,14 @@ body {
   footer {
     position: relative;
     background: var(--nav-bg);
-    height: 200px;
+    // height: 200px;
     &:before {
       position: absolute;
       content: '';
       left: 0;
       right: 0;
       top: -64px;
-      height: 128px;
+      height: 130px; // Firefox Mobile leaks
       background: inherit;
       clip-path: polygon(0 0, 0 50%, 100% 50%);
     }
