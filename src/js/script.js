@@ -97,6 +97,9 @@ function init() {
   // for podcasts
   podcastPlayerHandlerObserver();
 
+  // more projects button
+  moreProjectsClickHandler()
+
   // for scroll lock
   setObserver()
   navToggleCheckbox.addEventListener('change', menuToggle)
@@ -435,6 +438,25 @@ function fossRadioChangeListener() {
       }
     })
   })
+}
+
+function moreProjectsClickHandler() {
+  const moreButton = document.querySelector('.projects__other__more--link');
+  const lessButton = document.querySelector('.projects__other__less--link');
+  const otherProjectsContainer = document.querySelector('.projects__other');
+
+  // TODO:make transition smooth
+  const buttons = [moreButton, lessButton]
+  buttons.forEach((button) => button.addEventListener('click', () => {
+    otherProjectsContainer.classList.toggle('display-all');
+    if (button === lessButton) {
+      const y = moreButton.offsetTop - 200;
+      window.scroll({
+        top: y,
+        behavior: 'auto'
+      });
+    }
+  }))
 }
 
 init()
