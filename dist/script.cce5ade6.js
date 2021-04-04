@@ -221,10 +221,11 @@ function init() {
     changeTheme(LIGHT_THEME_NAME);
     setThemeIcons(LIGHT_THEME_NAME);
   }); // for scrolling experience tabs
+  // experienceRadioChangeListener()
+  // for scrolling foss tabs
+  // fossRadioChangeListener()
 
-  experienceRadioChangeListener(); // for scrolling foss tabs
-
-  fossRadioChangeListener(); // for podcasts
+  tabsChangeListener(); // for podcasts
 
   podcastPlayerHandlerObserver(); // for scroll lock
 
@@ -345,20 +346,20 @@ function setObserver() {
 function podcastPlayerHandler(params) {
   var itemSelector = '.recent__card__podcast__list--item';
   var toggleIconSelector = "".concat(itemSelector, "__heading--btn");
-  var progressSelector = "".concat(itemSelector, "__progress");
-  var plusMinusSelector = "".concat(itemSelector, "__plusminus");
+  var progressSelector = "".concat(itemSelector, "__progress"); // const plusMinusSelector = `${itemSelector}__plusminus`
+
   var podcasts = document.querySelectorAll(itemSelector);
 
   var _loop = function _loop(i) {
     var element = podcasts[i];
     var theButton = element.querySelector(toggleIconSelector);
     var theAudio = element.querySelector('audio');
-    var theBar = element.querySelector(progressSelector);
-    var plusMinus = element.querySelector(plusMinusSelector);
-    var plus10 = plusMinus.querySelector('.plus10');
-    var plus30 = plusMinus.querySelector('.plus30');
-    var minus10 = plusMinus.querySelector('.minus10');
-    var minus30 = plusMinus.querySelector('.minus30');
+    var theBar = element.querySelector(progressSelector); // const plusMinus = element.querySelector(plusMinusSelector)
+    // const plus10 = plusMinus.querySelector('.plus10')
+    // const plus30 = plusMinus.querySelector('.plus30')
+    // const minus10 = plusMinus.querySelector('.minus10')
+    // const minus30 = plusMinus.querySelector('.minus30')
+
     if (!theAudio) return "continue"; // Play pause button
 
     theButton.addEventListener('click', function (e) {
@@ -404,20 +405,20 @@ function podcastPlayerHandler(params) {
         theAudio.play();
       }
     } // plus minus 10 & 30
+    // plus10.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime + 10
+    // })
+    // plus30.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime + 30
+    // })
+    // minus10.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime - 10
+    // })
+    // minus30.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime - 30
+    // })
+    // When audio plays, do XYZ!
 
-
-    plus10.addEventListener('click', function (e) {
-      theAudio.currentTime = theAudio.currentTime + 10;
-    });
-    plus30.addEventListener('click', function (e) {
-      theAudio.currentTime = theAudio.currentTime + 30;
-    });
-    minus10.addEventListener('click', function (e) {
-      theAudio.currentTime = theAudio.currentTime - 10;
-    });
-    minus30.addEventListener('click', function (e) {
-      theAudio.currentTime = theAudio.currentTime - 30;
-    }); // When audio plays, do XYZ!
 
     theAudio.addEventListener('play', function (event) {
       console.log('Video is playing');
@@ -514,28 +515,49 @@ function scrollTo(el, who) {
   });
 }
 
-function experienceRadioChangeListener() {
-  var experienceTabs = document.querySelectorAll('input[type=radio][name="experience"]');
-  experienceTabs.forEach(function (tab) {
-    tab.addEventListener('change', function (e) {
-      e.preventDefault();
-      scrollTo(e.target, 'experience');
-      var contentContainer = e.target.closest('.experience__tablist').closest('.experience').querySelector(".experience__content");
-      var content = contentContainer.querySelector("#".concat(e.target.id, "-content"));
-      content.classList.add('active');
+function tabsChangeListener() {
+  var tabName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var tabNames = ['experience', 'foss'];
+  tabNames.forEach(function (tabName) {
+    var allTabs = document.querySelectorAll("input[type=radio][name=\"".concat(tabName, "\"]"));
+    allTabs.forEach(function (tab) {
+      tab.addEventListener('change', function (e) {
+        e.preventDefault();
+        scrollTo(e.target, tabName);
+        var contentContainer = e.target.closest(".".concat(tabName, "__tablist")).closest(".".concat(tabName)).querySelector(".".concat(tabName, "__content"));
+        var content = contentContainer.querySelector("#".concat(e.target.id, "-content")); // content.classList.add('active')
+        // remove active
 
-      if (contentContainer.hasChildNodes()) {
-        var children = contentContainer.childNodes;
+        if (contentContainer.hasChildNodes()) {
+          var children = contentContainer.childNodes;
 
-        for (var i = 0; i < children.length; i++) {
-          // children[i].id
-          var id = children[i].id;
+          for (var i = 0; i < children.length; i++) {
+            // children[i].id
+            var id = children[i].id;
 
-          if (id && id.startsWith('experience-') && id.endsWith('-content') && children[i] !== content) {
-            children[i].classList.remove('active');
+            if (id && id.startsWith("".concat(tabName, "-")) && id.endsWith('-content') && children[i] !== content) {
+              (function () {
+                var otherChild = children[i];
+                setTimeout(function () {
+                  return otherChild.classList.remove('animate');
+                }, 0);
+                setTimeout(function () {
+                  return otherChild.classList.remove('active');
+                }, 200); // children[i].classList.remove('active')
+                // children[i].classList.remove('animate')
+              })();
+            }
           }
-        }
-      }
+        } // add new active
+
+
+        setTimeout(function () {
+          return content.classList.add('active');
+        }, 200);
+        setTimeout(function () {
+          return content.classList.add('animate');
+        }, 210);
+      });
     });
   });
 }
@@ -554,7 +576,6 @@ function fossRadioChangeListener() {
         var children = contentContainer.childNodes;
 
         for (var i = 0; i < children.length; i++) {
-          // children[i].id
           var id = children[i].id;
 
           if (id && id.startsWith('foss-') && id.endsWith('-content') && children[i] !== content) {
@@ -568,4 +589,4 @@ function fossRadioChangeListener() {
 
 init();
 },{}]},{},["L4bL"], null)
-//# sourceMappingURL=script.f159b880.js.map
+//# sourceMappingURL=script.cce5ade6.js.map
