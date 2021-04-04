@@ -1,4 +1,5 @@
 @use '../1-helpers/colors' as clr;
+@use '../1-helpers/mixins' as m;
 @use "sass:color";
 body {
   max-width: 1300px;
@@ -37,6 +38,7 @@ body {
   }
 
   &__card {
+    @include m.dirty-bg;
     // background: rgba(clr.$grey-800, 0.4);
     // background: rgba(clr.$grey-900, 0.5);
 
@@ -284,7 +286,7 @@ body {
             display: flex;
             gap: 8px;
             justify-content: space-between;
-            color: clr.$grey-600;
+            color: clr.$grey-500;
             font-size: 1.5rem;
           }
           &__progress {
@@ -714,6 +716,7 @@ body {
     flex-basis: 100%;
   }
   &__card {
+    @include m.dirty-bg;
     $radiusTop: 4px;
     // background: rgba(clr.$grey-800, 0.4);
     // background: rgba(clr.$grey-900, 0.5);
@@ -727,9 +730,8 @@ body {
     min-height: 500px;
     display: flex;
     margin: 0 auto;
-    // justify-content: center;
+    padding: var(--side-space);
     flex-direction: column;
-    // outline: 2px solid red;
     flex-wrap: wrap;
     border-radius: $radius;
     position: relative;
@@ -760,10 +762,7 @@ body {
         1px 6px 12px rgba(39, 44, 49, 0.04);
       opacity: 0;
     }
-    // &::after {
-    //   // background: rgba(lightblue, 0.5);
-    //   opacity: 0;
-    // }
+
 
     &:hover {
       transform: translate3D(0, -8px, 0) scale(1);
@@ -779,9 +778,7 @@ body {
         transition: opacity 400ms ease;
         opacity: 1;
       }
-    }
-    p {
-      padding: 0 var(--side-space);
+    }    p {
       line-height: var(--line-height-lg);
       span {
         display: block;
@@ -1048,7 +1045,8 @@ body {
       flex-basis: 100%;
     }
     &__card {
-      &:nth-of-type(n + 3) {
+    @include m.dirty-bg;
+      &:nth-of-type(n + 4) {
         display: none;
       }
       //
