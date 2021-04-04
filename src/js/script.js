@@ -362,22 +362,7 @@ function abs(num) {
   const sign = num > 0 ? 1 : -1;
   return num * sign;
 }
-function scrollTo(el, who) {
-  el = el.closest(`.${who}__tablist--tab`)
-  // const elLeft = el.offsetLeft + el.offsetWidth;
-  const elLeft = el.offsetLeft;
-  const parent = el.closest(`.${who}__tablist`)
-
-  const scrollPos = elLeft - 70;
-
-  parent.scroll({
-    left: scrollPos,
-    behaviour: 'smooth'
-  })
-
-
-}
-function tabsChangeListener(tabName = '') {
+function tabsChangeListener() {
   const tabNames = ['experience', 'foss'];
 
   tabNames.forEach(tabName => {
@@ -385,7 +370,6 @@ function tabsChangeListener(tabName = '') {
     allTabs.forEach(tab => {
       tab.addEventListener('change', (e) => {
         e.preventDefault()
-        scrollTo(e.target, tabName)
         const contentContainer = e.target.closest(`.${tabName}__tablist`).closest(`.${tabName}`).querySelector(`.${tabName}__content`);
         const content = contentContainer.querySelector(`#${e.target.id}-content`)
         // content.classList.add('active')
@@ -415,29 +399,6 @@ function tabsChangeListener(tabName = '') {
 
 
 
-}
-function fossRadioChangeListener() {
-
-  const fossTabs = document.querySelectorAll('input[type=radio][name="foss"]')
-  fossTabs.forEach(tab => {
-    tab.addEventListener('change', (e) => {
-      e.preventDefault()
-      scrollTo(e.target, 'foss')
-      const contentContainer = e.target.closest('.foss__tablist').closest('.foss').querySelector(`.foss__content`);
-      const content = contentContainer.querySelector(`#${e.target.id}-content`);
-      content.classList.add('active')
-
-      if (contentContainer.hasChildNodes()) {
-        let children = contentContainer.childNodes;
-        for (let i = 0; i < children.length; i++) {
-          const id = children[i].id
-          if (id && id.startsWith('foss-') && id.endsWith('-content') && children[i] !== content) {
-            children[i].classList.remove('active')
-          }
-        }
-      }
-    })
-  })
 }
 
 function moreProjectsClickHandler() {
