@@ -227,7 +227,9 @@ function init() {
 
   tabsChangeListener(); // for podcasts
 
-  podcastPlayerHandlerObserver(); // for scroll lock
+  podcastPlayerHandlerObserver(); // more projects button
+
+  moreProjectsClickHandler(); // for scroll lock
 
   setObserver();
   navToggleCheckbox.addEventListener('change', menuToggle); // fixed menu on reverse scroll
@@ -587,6 +589,27 @@ function fossRadioChangeListener() {
   });
 }
 
+function moreProjectsClickHandler() {
+  var moreButton = document.querySelector('.projects__other__more--link');
+  var lessButton = document.querySelector('.projects__other__less--link');
+  var otherProjectsContainer = document.querySelector('.projects__other'); // TODO:make transition smooth
+
+  var buttons = [moreButton, lessButton];
+  buttons.forEach(function (button) {
+    return button.addEventListener('click', function () {
+      otherProjectsContainer.classList.toggle('display-all');
+
+      if (button === lessButton) {
+        var y = moreButton.offsetTop - 200;
+        window.scroll({
+          top: y,
+          behavior: 'auto'
+        });
+      }
+    });
+  });
+}
+
 init();
 },{}]},{},["L4bL"], null)
-//# sourceMappingURL=script.cce5ade6.js.map
+//# sourceMappingURL=script.434d74e6.js.map
