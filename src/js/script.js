@@ -88,9 +88,11 @@ function init() {
     setThemeIcons(LIGHT_THEME_NAME)
   })
   // for scrolling experience tabs
-  experienceRadioChangeListener()
+  // experienceRadioChangeListener()
   // for scrolling foss tabs
-  fossRadioChangeListener()
+  // fossRadioChangeListener()
+
+  tabsChangeListener()
 
   // for podcasts
   podcastPlayerHandlerObserver();
@@ -206,7 +208,7 @@ function podcastPlayerHandler(params) {
   const itemSelector = '.recent__card__podcast__list--item';
   const toggleIconSelector = `${itemSelector}__heading--btn`
   const progressSelector = `${itemSelector}__progress`
-  const plusMinusSelector = `${itemSelector}__plusminus`
+  // const plusMinusSelector = `${itemSelector}__plusminus`
   const podcasts = document.querySelectorAll(itemSelector)
 
   for (let i = 0; i < podcasts.length; i++) {
@@ -214,11 +216,11 @@ function podcastPlayerHandler(params) {
     const theButton = element.querySelector(toggleIconSelector);
     const theAudio = element.querySelector('audio');
     const theBar = element.querySelector(progressSelector);
-    const plusMinus = element.querySelector(plusMinusSelector)
-    const plus10 = plusMinus.querySelector('.plus10')
-    const plus30 = plusMinus.querySelector('.plus30')
-    const minus10 = plusMinus.querySelector('.minus10')
-    const minus30 = plusMinus.querySelector('.minus30')
+    // const plusMinus = element.querySelector(plusMinusSelector)
+    // const plus10 = plusMinus.querySelector('.plus10')
+    // const plus30 = plusMinus.querySelector('.plus30')
+    // const minus10 = plusMinus.querySelector('.minus10')
+    // const minus30 = plusMinus.querySelector('.minus30')
 
     if (!theAudio) continue;
 
@@ -268,18 +270,18 @@ function podcastPlayerHandler(params) {
       }
     }
     // plus minus 10 & 30
-    plus10.addEventListener('click', (e) => {
-      theAudio.currentTime = theAudio.currentTime + 10
-    })
-    plus30.addEventListener('click', (e) => {
-      theAudio.currentTime = theAudio.currentTime + 30
-    })
-    minus10.addEventListener('click', (e) => {
-      theAudio.currentTime = theAudio.currentTime - 10
-    })
-    minus30.addEventListener('click', (e) => {
-      theAudio.currentTime = theAudio.currentTime - 30
-    })
+    // plus10.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime + 10
+    // })
+    // plus30.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime + 30
+    // })
+    // minus10.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime - 10
+    // })
+    // minus30.addEventListener('click', (e) => {
+    //   theAudio.currentTime = theAudio.currentTime - 30
+    // })
 
     // When audio plays, do XYZ!
     theAudio.addEventListener('play', (event) => {
@@ -372,29 +374,43 @@ function scrollTo(el, who) {
 
 
 }
-function experienceRadioChangeListener() {
+function tabsChangeListener(tabName = '') {
+  const tabNames = ['experience', 'foss'];
 
-  const experienceTabs = document.querySelectorAll('input[type=radio][name="experience"]')
-  experienceTabs.forEach(tab => {
-    tab.addEventListener('change', (e) => {
-      e.preventDefault()
-      scrollTo(e.target, 'experience')
-      const contentContainer = e.target.closest('.experience__tablist').closest('.experience').querySelector(`.experience__content`);
-      const content = contentContainer.querySelector(`#${e.target.id}-content`)
-      content.classList.add('active')
-
-      if (contentContainer.hasChildNodes()) {
-        let children = contentContainer.childNodes;
-        for (let i = 0; i < children.length; i++) {
-          // children[i].id
-          const id = children[i].id
-          if (id && id.startsWith('experience-') && id.endsWith('-content') && children[i] !== content) {
-            children[i].classList.remove('active')
+  tabNames.forEach(tabName => {
+    const allTabs = document.querySelectorAll(`input[type=radio][name="${tabName}"]`)
+    allTabs.forEach(tab => {
+      tab.addEventListener('change', (e) => {
+        e.preventDefault()
+        scrollTo(e.target, tabName)
+        const contentContainer = e.target.closest(`.${tabName}__tablist`).closest(`.${tabName}`).querySelector(`.${tabName}__content`);
+        const content = contentContainer.querySelector(`#${e.target.id}-content`)
+        // content.classList.add('active')
+        // remove active
+        if (contentContainer.hasChildNodes()) {
+          let children = contentContainer.childNodes;
+          for (let i = 0; i < children.length; i++) {
+            // children[i].id
+            const id = children[i].id
+            if (id && id.startsWith(`${tabName}-`) && id.endsWith('-content') && children[i] !== content) {
+              const otherChild = children[i];
+              setTimeout(() => otherChild.classList.remove('animate'), 0);
+              setTimeout(() => otherChild.classList.remove('active'), 200);
+              // children[i].classList.remove('active')
+              // children[i].classList.remove('animate')
+            }
           }
         }
-      }
+        // add new active
+        setTimeout(() => content.classList.add('active'), 200);
+        setTimeout(() => content.classList.add('animate'), 210);
+
+      })
     })
+
   })
+
+
 
 }
 function fossRadioChangeListener() {
@@ -405,13 +421,12 @@ function fossRadioChangeListener() {
       e.preventDefault()
       scrollTo(e.target, 'foss')
       const contentContainer = e.target.closest('.foss__tablist').closest('.foss').querySelector(`.foss__content`);
-      const content = contentContainer.querySelector(`#${e.target.id}-content`)
+      const content = contentContainer.querySelector(`#${e.target.id}-content`);
       content.classList.add('active')
 
       if (contentContainer.hasChildNodes()) {
         let children = contentContainer.childNodes;
         for (let i = 0; i < children.length; i++) {
-          // children[i].id
           const id = children[i].id
           if (id && id.startsWith('foss-') && id.endsWith('-content') && children[i] !== content) {
             children[i].classList.remove('active')
