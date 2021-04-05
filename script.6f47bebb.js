@@ -505,27 +505,13 @@ function abs(num) {
   return num * sign;
 }
 
-function scrollTo(el, who) {
-  el = el.closest(".".concat(who, "__tablist--tab")); // const elLeft = el.offsetLeft + el.offsetWidth;
-
-  var elLeft = el.offsetLeft;
-  var parent = el.closest(".".concat(who, "__tablist"));
-  var scrollPos = elLeft - 70;
-  parent.scroll({
-    left: scrollPos,
-    behaviour: 'smooth'
-  });
-}
-
 function tabsChangeListener() {
-  var tabName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var tabNames = ['experience', 'foss'];
   tabNames.forEach(function (tabName) {
     var allTabs = document.querySelectorAll("input[type=radio][name=\"".concat(tabName, "\"]"));
     allTabs.forEach(function (tab) {
       tab.addEventListener('change', function (e) {
         e.preventDefault();
-        scrollTo(e.target, tabName);
         var contentContainer = e.target.closest(".".concat(tabName, "__tablist")).closest(".".concat(tabName)).querySelector(".".concat(tabName, "__content"));
         var content = contentContainer.querySelector("#".concat(e.target.id, "-content")); // content.classList.add('active')
         // remove active
@@ -564,31 +550,6 @@ function tabsChangeListener() {
   });
 }
 
-function fossRadioChangeListener() {
-  var fossTabs = document.querySelectorAll('input[type=radio][name="foss"]');
-  fossTabs.forEach(function (tab) {
-    tab.addEventListener('change', function (e) {
-      e.preventDefault();
-      scrollTo(e.target, 'foss');
-      var contentContainer = e.target.closest('.foss__tablist').closest('.foss').querySelector(".foss__content");
-      var content = contentContainer.querySelector("#".concat(e.target.id, "-content"));
-      content.classList.add('active');
-
-      if (contentContainer.hasChildNodes()) {
-        var children = contentContainer.childNodes;
-
-        for (var i = 0; i < children.length; i++) {
-          var id = children[i].id;
-
-          if (id && id.startsWith('foss-') && id.endsWith('-content') && children[i] !== content) {
-            children[i].classList.remove('active');
-          }
-        }
-      }
-    });
-  });
-}
-
 function moreProjectsClickHandler() {
   var moreButton = document.querySelector('.projects__other__more--link');
   var lessButton = document.querySelector('.projects__other__less--link');
@@ -612,4 +573,4 @@ function moreProjectsClickHandler() {
 
 init();
 },{}]},{},["L4bL"], null)
-//# sourceMappingURL=script.434d74e6.js.map
+//# sourceMappingURL=script.6f47bebb.js.map
