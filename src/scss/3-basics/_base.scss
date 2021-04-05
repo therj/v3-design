@@ -7,6 +7,10 @@ body {
   .hello {
     &__hi {
       // margin-top: 128px;
+      span{
+        @include m.bgBodyDueDust;
+      }
+
     }
     &__name {
       background: var(--title-color-grad);
