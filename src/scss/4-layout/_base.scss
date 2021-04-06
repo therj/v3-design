@@ -1181,8 +1181,8 @@ body {
           opacity: 1;
         }
         .projects__other__card__icons .left img {
-          filter: unset;
-          transition: all 400ms ease;
+          filter: contrast(1%) blur(100px);
+          transition: all 400ms 400ms ease;
         }
       }
 
@@ -1206,7 +1206,8 @@ body {
             padding: 8px;
             display: block;
             filter: contrast(10%);
-            transition: all 400ms ease;
+            transition: all 400ms 400ms ease;
+            transition: all 400ms 200ms ease;
           }
         }
         .right {
