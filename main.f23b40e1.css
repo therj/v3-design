@@ -1987,8 +1987,8 @@ body {
   opacity: 1;
 }
 .projects__other__card:hover .projects__other__card__icons .left img {
-  filter: unset;
-  transition: all 400ms ease;
+  filter: contrast(1%) blur(100px);
+  transition: all 400ms 400ms ease;
 }
 .projects__other__card__icons {
   display: flex;
@@ -2006,7 +2006,8 @@ body {
   padding: 8px;
   display: block;
   filter: contrast(10%);
-  transition: all 400ms ease;
+  transition: all 400ms 400ms ease;
+  transition: all 400ms 200ms ease;
 }
 .projects__other__card__icons .right {
   display: flex;
@@ -2066,4 +2067,4 @@ body {
   display: none;
 }
 
-/*# sourceMappingURL=main.8e3b6f3e.css.map */
+/*# sourceMappingURL=main.f23b40e1.css.map */
