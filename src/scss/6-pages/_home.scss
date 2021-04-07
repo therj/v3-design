@@ -1,32 +1,48 @@
-@use '../1-helpers/colors' as clr;
-@use '../1-helpers/mixins' as m;
-@use "sass:color";
-body {
-  max-width: 1300px;
-  margin: auto;
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the home page.
+// -----------------------------------------------------------------------------
+
+@use '../1-abstracts/mixins' as m;
+@use '../1-abstracts/variables.colors' as clr;
+@use '../1-abstracts/variables' as g;
+
+@keyframes title-animation {
+  0% {
+    background-position: 300% 0px;
+  }
+  100% {
+    background-position: 0% 0px;
+  }
 }
-[target='_blank']::after {
-  // color: red ;
-  content: '';
-  display: inline-block;
-  margin-left: 0.1em;
-  height: 0.7em;
-  width: 1em;
-  background: url('/images/assets/external.svg');
-  background-position: 50% 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-[data-bg='dark'][target='_blank']::after {
-  content: '';
-  display: inline-block;
-  margin-left: 0.1em;
-  height: 0.7em;
-  width: 1em;
-  background: url('/images/assets/external-light.svg');
-  background-position: 50% 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
+
+.intro {
+  @include m.dirty-bg;
+  background-size: 40%;
+  .hello {
+    &__hi {
+      // margin-top: 128px;
+      span {
+        @include m.bgBodyDueDust;
+      }
+    }
+    &__name {
+      background: var(--title-color-grad);
+      // background: linear-gradient(90deg, red, green, red);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 300%;
+      animation: title-animation 32s linear infinite;
+      font-weight: 600;
+      font-size: 5rem;
+      // TODO: for browers lacking text clip support
+      // @supports not (-webkit-background-clip:text){
+      //   background: transparent;
+      //   color: var(--text-color);
+      //   // color: clr.$purple-400;
+      // }
+    }
+  }
 }
 .recent {
   display: flex;
@@ -39,7 +55,7 @@ body {
 
   &__card {
     @include m.dirty-bg-group;
-    background-size: 40%;
+    background-size: 80%;
     // background: rgba(clr.$grey-800, 0.4);
     // background: rgba(clr.$grey-900, 0.5);
 
@@ -199,6 +215,7 @@ body {
       }
     }
     &__podcast {
+      background-size: 40%;
       &--container {
         // background: clr.$grey-900;
         flex: 1 1 100%;
@@ -497,8 +514,6 @@ body {
     }
   }
   &__tablist {
-    @include m.dirty-bg;
-    background-size: 60%;
     margin: 0 -20px;
     padding: 0;
     // max-width: min-content;
@@ -603,7 +618,7 @@ body {
         cursor: pointer;
         display: flex;
         align-items: center;
-        background: rgba(clr.$grey-900,  0.4);
+        background: rgba(clr.$grey-900, 0.4);
         // background: url('/images/assets/pattern.svg');
         // background: rgba(clr.$grey-900,  4) url('/images/assets/pattern.svg');
         // background-size: 240%;
@@ -611,23 +626,19 @@ body {
         &:hover {
           background: clr.$grad-100;
           // background: rgba(clr.$purple-400, 0.2);
-        transition: all 400ms ease;
-        //   url('/images/assets/pattern.svg');
-        // background-size: 240%;
-          ;
+          transition: all 400ms ease;
+          //   url('/images/assets/pattern.svg');
+          // background-size: 240%;
         }
       }
       input:checked + label {
-        background: clr.$grad-500
-          //  url('/images/assets/pattern.svg');
-        ;
-          // background: rgba(clr.$purple-500, 0.8)
-          //  url('/images/assets/pattern.svg');
-          ;
-
+        background: clr.$grad-500 //  url('/images/assets/pattern.svg');
+;
+        // background: rgba(clr.$purple-500, 0.8)
+        //  url('/images/assets/pattern.svg');
         color: var(--bg-color);
         // transition: all 400ms ease-out;
-        span{
+        span {
           // background: none;
         }
       }
@@ -673,13 +684,12 @@ body {
       }
       &__subtitle {
         //
-        span{
+        span {
           @include m.bgBodyDueDust;
-
         }
       }
       &__duration {
-        &>*{
+        & > * {
           @include m.bgBodyDueDust;
         }
         .since {
@@ -698,7 +708,7 @@ body {
         list-style-position: outside;
         &--point {
           padding-left: 16px;
-          span{
+          span {
             @include m.bgBodyDueDust;
           }
           &::marker {
@@ -787,7 +797,7 @@ body {
   }
   &__card {
     @include m.dirty-bg-group;
-    background-size: 40%;
+    background-size: 80%;
     $radiusTop: 4px;
     // background: rgba(clr.$grey-800, 0.4);
     // background: rgba(clr.$grey-900, 0.5);
@@ -889,7 +899,7 @@ body {
     &__item {
       display: flex;
       @include m.dirty-bg-group;
-      background-size: 40%;
+      background-size: 20%;
       // HOVER EFFECTS
       //
       position: relative;
@@ -1119,7 +1129,7 @@ body {
     }
     &__card {
       @include m.dirty-bg-group;
-      background-size: 40%;
+      background-size: 80%;
       &:nth-of-type(n + 4) {
         display: none;
       }
@@ -1278,4 +1288,162 @@ body {
       display: none;
     }
   }
+}
+
+section {
+  // :where supported from Chrome 88, released 19Jan, 2021
+  // are you still sure about using?
+
+  // :where(h1, h2, h3, h4, h5, h6, p) {
+  //   padding: 0px var(--side-space);
+  //   margin: var(--gap-between) auto;
+  // }
+  // :where(p) {
+  //   margin-left: 0;
+  //   max-width: 60ch;
+  // }
+  min-height: 500px;
+  padding: 64px var(--side-space);
+  // padding-top: 64px;
+  padding-bottom: 32px;
+  &:nth-of-type(2n) {
+    // background: var(--bg-even);
+  }
+  &:nth-of-type(2n + 1) {
+    // background: var(--bg-odd);
+  }
+  &:first-of-type {
+    margin-top: -#{g.$poly-height};
+  }
+  &:last-of-type {
+    padding-bottom: g.$poly-height * 4;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: var(--gap-between) auto;
+  }
+  p {
+    margin-left: 0;
+  }
+  .hello {
+    &__hi {
+      margin-bottom: 0;
+    }
+    &__name {
+      font-family: var(--title-font-family);
+      margin-top: 0;
+    }
+    &__intro {
+      background: url('/images/assets/pattern.svg');
+      background-size: 40%;
+      &--short {
+        font-weight: bold;
+        font-size: 2.5rem;
+        & > span {
+          @include m.bgBodyDueDust;
+        }
+      }
+      &--long {
+        & > span {
+          @include m.bgBodyDueDust;
+        }
+        font-size: 2.5rem;
+        line-height: var(--line-height-lg);
+        max-width: var(--narrow-text-width);
+        position: relative;
+        .performant {
+          cursor: pointer;
+          color: clr.$purple-400;
+          padding: 0px 8px 0px 0px;
+        }
+        .performant > .perform {
+          opacity: 0;
+          visibility: hidden;
+          font-size: 1.5rem;
+          color: initial;
+          position: absolute;
+          padding: var(--gap-between) var(--side-space);
+          padding: var(--gap-between);
+          padding: 20px 10px;
+          background: rgba(clr.$grey-900, 0.9);
+          border-radius: 4px;
+          box-shadow: 8px 14px 38px rgb(39 44 49 / 6%),
+            1px 3px 8px rgb(39 44 49 / 3%), 8px 28px 50px rgb(39 44 49 / 7%),
+            1px 6px 12px rgb(39 44 49 / 4%), -8px -14px 38px rgb(39 44 49 / 6%),
+            1px 3px 8px rgb(39 44 49 / 3%), -8px -28px 50px rgb(39 44 49 / 7%),
+            1px 6px 12px rgb(39 44 49 / 4%);
+
+          bottom: -100px;
+          left: 0px;
+          transition: all 400ms ease;
+          max-width: 56ch;
+        }
+        .performant:hover > .perform {
+          opacity: 1;
+          visibility: visible;
+          transition: all 400ms ease;
+        }
+      }
+    }
+  }
+  .cta {
+    font-size: 2.5rem;
+    max-width: var(--narrow-text-width);
+    display: flex;
+    margin-top: 64px;
+    flex-direction: row;
+    gap: var(--gap-between-btns);
+    flex-wrap: wrap;
+    align-items: center;
+    align-items: stretch;
+
+    &__btn {
+      flex-grow: 1;
+      text-align: center;
+      padding: 20px 40px;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: var(--text-color);
+      &--work {
+        background: var(--work-btn-bg);
+        color: var(--work-btn-text-color);
+        background-size: 200% 100%;
+        background-position: 100% 0%;
+        transition: all 400ms ease-in;
+
+        &:hover {
+          background-position: 200% 0%;
+          transition: all 400ms ease-out;
+        }
+      }
+      &--mentorship {
+        border: 4px solid clr.$purple-500;
+        transition: all 400ms ease;
+        @include m.dirty-bg;
+        background-size: 120%;
+        background-position: 30% 4%;
+        span {
+          @include m.bgBodyDueDust;
+        }
+        &:hover {
+          transition: all 400ms ease;
+          border-color: clr.$blue-500;
+          background-position: 0% 0%;
+        }
+      }
+    }
+  }
+}
+
+h2 {
+  text-align: center;
 }

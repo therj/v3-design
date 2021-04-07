@@ -1,3 +1,10 @@
-@use "3-basics" as *;
-@use "1-helpers/variables" as *;
-@use "4-layout" as *;
+@charset "UTF-8";
+//
+// Structure Guide: https://github.com/KittyGiraudel/sass-boilerplate/blob/master/stylesheets
+
+// -----------------------------------------------------------------------------
+
+@use "3-base" as *;
+@use "4-layout/navigation" as *;
+@use "4-layout/footer" as *;
+@use "6-pages/home" as *;

@@ -1,0 +1,72 @@
+@use './variables.colors' as clr;
+
+
+
+@mixin text-xs {
+  font-size: 0.8rem;
+  line-height: 1.2em;
+}
+@mixin text-s {
+  font-size: 1.2rem;
+  line-height: 1.2em;
+}
+
+@mixin text-m {
+  font-size: 1.6rem;
+  line-height: 1.5em;
+}
+@mixin text-l {
+  font-size: 2.4rem;
+  line-height: 1.2em;
+}
+@mixin text-xl {
+  font-size: 3.2rem;
+  line-height: 1.2em;
+}
+@mixin text-xxl {
+  font-size: 4rem;
+  line-height: 1.2em;
+}
+
+@mixin bgBodyDueDust {
+  background: var(--bg-color);
+  background-clip: content-box;
+}
+
+@mixin dark-mode-image-filter {
+  // Make images slightly grayscale
+  filter: grayscale(30%) brightness(0.8) contrast(1.2);
+  &.no-dark {
+    filter: unset;
+  }
+}
+
+@mixin dirty-bg{
+    background: url('/images/assets/pattern.svg');
+}
+@mixin dirty-bg-group {
+  @include dirty-bg;
+  background-size: 120%;
+  &:nth-of-type(n) {
+    background-position: 20% 20%;
+  }
+  &:nth-of-type(2n) {
+    background-position: 80% 80%;
+  }
+  &:nth-of-type(3n) {
+    // background-size: 315%;
+    background-position: 0% 0%;
+  }
+  &:nth-of-type(4n) {
+    // background-size: 315%;
+    background-position: 10% 10%;
+  }
+  &:nth-of-type(5n) {
+    // background-size: 315%;
+    background-position: 60% 60%;
+  }
+  &:nth-of-type(6n) {
+    // background-size: 315%;
+    background-position: 30% 30%;
+  }
+}

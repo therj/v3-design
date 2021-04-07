@@ -1,0 +1,69 @@
+@use '../1-abstracts/variables.colors' as clr;
+@use '../1-abstracts/functions' as fn;
+@use './cssVariables.color.mixin' as siteColors;
+:root {
+  //? You probably won't need this!
+  //* @include siteColors;
+
+  // Common properties
+  --root-font-size: 62.5%;
+  --body-font-size: 1.6rem;
+  --body-font-size: 2rem;
+
+  --title-font-family: 'Inter', sans-serif;
+  --body-font-family: 'Roboto', sans-serif;
+  --body-font-weight: 400;
+  --body-line-height: 1.2;
+  --line-height-lg: 1.5;
+  --side-space: 20px;
+  --gap-between: 20px;
+  --gap-between-btns: 40px;
+
+  --narrow-text-width: 56ch;
+
+  --z-nav: 900;
+  --z-nav-children: 910;
+  --z-logo: 920;
+  --z-theme: 920;
+  --z-ham: 910;
+  $purple-500x40: rgba(clr.$purple-500, 0.4);
+  --outline-color: #{$purple-500x40};
+
+  // light mode variables
+  --text-color: #{clr.$grey-25};
+  --bg-color: #{clr.$grey-1000};
+
+  --nav-bg: #{clr.$grad-500};
+  --title-color-grad: #{clr.$grad-500-3};
+  --menu-text-bg: #{clr.$grad-200};
+  --ham-bg: #{clr.$grad-200};
+  --work-btn-bg: #{clr.$grad-500};
+  --work-btn-text-color: #{clr.$grey-1000};
+  --mentorship-btn-border: #{clr.$grad-500};
+  --nav-drop-shadow: drop-shadow(0px 0px 2px #{rgba(clr.$purple-500, 0.8)});
+
+  // temp
+  --bg-even: rgba(255, 0, 0, 0.02);
+  --bg-odd: rgba(0, 255, 0, 0.02);
+  //
+  --external-link-bg: url('/images/assets/external.svg');
+  --external-link-bg-light: url('/images/assets/external-light.svg');
+
+  // dark mode variables
+  &[data-theme='dark'] {
+    // temp
+    --bg-even: rgba(255, 0, 0, 0.02);
+    --bg-odd: rgba(0, 255, 0, 0.02);
+
+    --text-color: #{clr.$grey-800};
+    --bg-color: #{clr.$grey-75};
+    --nav-bg: #{clr.$grad-600};
+    --title-color-grad: #{clr.$grad-400-3};
+    --menu-text-bg: #{clr.$grad-300};
+    --ham-bg: #{clr.$grad-300};
+    --work-btn-bg: #{clr.$grad-700};
+    --mentorship-btn-border: #{clr.$grad-400-3};
+    --nav-drop-shadow: drop-shadow(0px 0px 2px #{rgba(clr.$purple-600, 0.8)});
+    --external-link-bg: url('/images/assets/external-light.svg');
+  }
+}

@@ -1,0 +1,54 @@
+@use "sass:color";
+@use '../1-abstracts/variables.colors' as clr;
+
+body {
+  max-width: 1300px;
+  margin: auto;
+  outline-width: 20px;
+  outline-style: solid;
+  outline-color: var(--outline-color);
+
+  // TODO: fix this scroll locking thing
+  @mixin hideScrollbar {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  // @include hideScrollbar;
+
+  &.scroll-lock {
+    // height: 100vh;
+    // width: 100%;
+    // overflow: hidden;
+
+    // @media screen and (min-width:1300px) {
+    //   transform: translateX(-50%);
+    //   margin-left: calc(50% - 8px);
+    // }
+  }
+
+
+}
+@mixin afterMath {
+  // color: red ;
+  content: '';
+  display: inline-block;
+  margin-left: 0.1em;
+  height: 0.7em;
+  width: 1em;
+  // background: url('/images/assets/external.svg');
+  background-position: 50% 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+[target='_blank']::after {
+  // MUST: bg  before bg position/size/repeat!
+  background: var(--external-link-bg);
+  @include afterMath;
+}
+[data-bg='dark'][target='_blank']::after {
+  background: var(--external-link-bg-light);
+  @include afterMath;
+}

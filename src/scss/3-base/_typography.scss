@@ -1,0 +1,38 @@
+/**
+ * Basic typography style for copy text
+ */
+
+@mixin tran($light: 1) {
+  $tra: ease-out;
+  @if $light == 1 {
+    $tra: ease-in;
+  }
+  transition: text 300ms $tra, background 300ms $tra;
+}
+:root {
+  body {
+    @include tran(1); // use variable!
+  }
+  &[data-theme='dark'] body {
+    @include tran(2);
+    // transition: text 200ms ease-in-out, background 200ms ease-in;
+  }
+}
+body {
+  // color: $text-color;
+  // font: normal 125% / 1.4 $text-font-stack;
+  color: var(--text-color);
+  background: var(--bg-color);
+  font-size: var(--body-font-size);
+  font-family: var(--body-font-family);
+  font-weight: var(--body-font-weight);
+  line-height: var(--body-line-height);
+
+  .after-dot:after {
+    content: '.';
+    display: inline;
+    color: var(--text-color);
+    font-size: 1.2em;
+    line-height: 0;
+  }
+}

@@ -1,4 +1,4 @@
-@use '../2-tools/normalize' as *;
+@use '../2-vendors/normalize' as *;
 html {
   font-size: var(--root-font-size);
   box-sizing: border-box;

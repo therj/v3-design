@@ -1,0 +1,166 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+
+@use '../1-abstracts/variables.colors' as clr;
+footer {
+  position: relative;
+  background: var(--nav-bg);
+  // height: 200px;
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: -64px;
+    height: 130px; // Firefox Mobile leaks
+    background: inherit;
+    clip-path: polygon(0 0, 0 50%, 100% 50%);
+  }
+}
+
+.footer {
+  min-height: 500px;
+  padding: 64px var(--side-space);
+  padding-bottom: 128px;
+  color: var(--bg-color);
+  // a {
+  //   color: var(--bg-color);
+  // }
+  display: flex;
+  gap: 80px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  &__work {
+    // color: var(--bg-color);
+
+    flex: 1 1 400px;
+    justify-items: flex-start;
+    &__title {
+      text-align: left;
+    }
+    &__description {
+      max-width: 56ch;
+    }
+    &__start {
+      display: inline-flex;
+      &--link {
+        font-size: 2.5rem;
+        // font-weight: bold;
+        color: var(--text-color);
+        color: var(--bg-color);
+        padding: 0.8em 1.6em;
+        text-decoration: none;
+        border-radius: 500em;
+        border: 2px solid clr.$grey-900;
+        background: var(--work-btn-bg);
+        background-size: 200% 100%;
+        background-position: 190% 0%;
+        transition: all 400ms ease-in;
+        &:hover {
+          background-position: 100% 0%;
+          transition: all 400ms ease-out;
+        }
+      }
+    }
+  }
+  &__social {
+    flex: 1 1 1px;
+    display: flex;
+    flex-flow: column wrap;
+    &__title {
+      // flex-basis: 100%;
+      // text-align: left;
+    }
+    &__link {
+      display: flex;
+      flex-flow: column wrap;
+      gap: 20px;
+      &--item {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        text-decoration: none;
+        color: var(--bg-color);
+        width: fit-content;
+        &:hover img {
+          filter: grayscale(90%) brightness(80%);
+          transition: all 400ms ease;
+        }
+        img {
+          display: block;
+          width: 32px;
+          height: 32px;
+          transition: all 800ms ease; //filters
+        }
+        span {
+        }
+      }
+    }
+  }
+  &__companies {
+    flex-basis: 100%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    &__info {
+      flex: 0.5 4 300px;
+    }
+    &__logos {
+      flex: 2 0.25 300px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      a img {
+        display: block;
+        padding: 8px;
+        width: 48px;
+        height: 48px;
+        filter: grayscale(40%);
+        filter: grayscale(40%) brightness(80%);
+        transition: all 800ms ease;
+        &:hover {
+          filter: unset;
+          transition: all 400ms ease;
+        }
+      }
+    }
+    &__credit {
+      flex-basis: 100%;
+    }
+  }
+}
+.credit {
+  background: clr.$grey-800;
+  padding: 20px 10px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  &__logo {
+    img {
+      display: block;
+      height: 48px;
+      width: 48px;
+    }
+  }
+  &__text {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 2px;
+  }
+  &__privacy {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    color: clr.$grey-200;
+    text-decoration: none;
+    &:hover {
+      color: clr.$blue-500;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@use '../1-abstracts/mixins' as mx;
+
+[data-theme='dark'] img,
+.force-dark {
+  @include mx.dark-mode-image-filter;
+}
+
+[data-theme='dark'] .can-go-dark {
+  @include mx.dark-mode-image-filter;
+}
